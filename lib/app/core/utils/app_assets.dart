@@ -20,6 +20,31 @@ class AppAssets {
   static const String studentAvatarMichael = 'assets/images/student_avatar_michael.jpg';
   static const String studentAvatarOlivia = 'assets/images/student_avatar_olivia.jpg';
   static const String teacherProfileAvatar = 'assets/images/teacher_profile_avatar.jpg';
+  static const String teacherOnboard1 = 'assets/images/teacher_onboard_1.png';
+  static const String teacherOnboard2 = 'assets/images/teacher_onboard_2.png';
+  static const String teacherOnboard3 = 'assets/images/teacher_onboard_3.png';
+  static const String parentOnboard1 = 'assets/images/parent_onboard_1.png';
+  static const String parentOnboard2 = 'assets/images/parent_onboard_2.jpg';
+  static const String parentOnboard3 = 'assets/images/parent_onboard_3.jpg';
+  static const String studentOnboarding1 = 'assets/images/student_onboard_1.png';
+  static const String studentOnboard1 = 'assets/images/student_onboard_1.png';
+  static const String studentOnboard2 = 'assets/images/student_onboard_2.png';
+  static const String studentOnboard3 = 'assets/images/student_onboard_3.png';
+  static const String studentVrHero = 'assets/images/student_vr_hero.png';
+  static const String studentCellStructureHero = 'assets/images/student/cell_structure_hero.jpg';
+  static const String studentArScanBg = 'assets/images/student/ar_camera_scan_bg.jpg';
+  static const String studentAr3dCellProjected = 'assets/images/student/ar_3d_cell_projected.jpg';
+  static const String studentVrHumanHeart = 'assets/images/student/vr_human_heart.jpg';
+  static const String studentVrSolarSystem = 'assets/images/student/vr_solar_system.jpg';
+  static const String studentVrPyramids = 'assets/images/student/vr_pyramids.jpg';
+  static const String studentAiTutorAvatar = 'assets/images/student/ai_tutor_avatar.jpg';
+  static const String studentRewardArVr = 'assets/images/student/reward_ar_vr.jpg';
+  static const String studentRewardAiUses = 'assets/images/student/reward_ai_uses.jpg';
+  static const String studentRewardCertificates = 'assets/images/student/reward_certificates.jpg';
+  static const String studentProfileAlex = 'assets/images/student/student_profile_alex.jpg';
+  static const String individualHeroArVr = 'assets/images/individual_hero_ar_vr.png';
+  static const String searchEmptyState = 'assets/images/search_empty_state.jpg';
+  static const String selfPacedBookHero = 'assets/images/self_paced_book_hero.png';
 
   // Icons
   static const String iconStudentChevron = 'assets/icons/icon_student_chevron.svg';
@@ -90,7 +115,11 @@ class AppAssets {
   static const String teacherNavBook = 'assets/icons/teacher_nav_book.png';
   static const String teacherNavScreen = 'assets/icons/teacher_nav_screen.png';
   static const String teacherNavProfile = 'assets/icons/teacher_nav_profile.png';
+
+  // Student Flow Assets
+  static const String studentQuizTrophy = 'assets/images/student/quiz_trophy.jpg';
 }
+
 
 
 

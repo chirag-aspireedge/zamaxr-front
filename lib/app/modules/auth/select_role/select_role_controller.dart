@@ -58,7 +58,13 @@ class SelectRoleController extends GetxController {
 
   void continueWithRole() {
     if (selectedRole.value == UserRole.teacher) {
-      Get.toNamed(Routes.TEACHER_INTRODUCTION);
+      Get.toNamed(Routes.TEACHER_ONBOARDING);
+    } else if (selectedRole.value == UserRole.student) {
+      Get.toNamed(Routes.STUDENT_ONBOARDING);
+    } else if (selectedRole.value == UserRole.parent) {
+      Get.toNamed(Routes.PARENT_ONBOARDING);
+    } else if (selectedRole.value == UserRole.individual) {
+      Get.toNamed(Routes.INDIVIDUAL_HOME);
     } else {
       Get.toNamed(Routes.REGISTRATION, arguments: selectedRole.value);
     }

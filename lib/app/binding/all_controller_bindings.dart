@@ -33,6 +33,7 @@ import '../modules/teacher/dashboard/teacher_dashboard_controller.dart';
 import '../modules/teacher/edit_lesson/teacher_edit_lesson_controller.dart';
 import '../modules/teacher/home/teacher_home_controller.dart';
 import '../modules/teacher/introduction/teacher_introduction_controller.dart';
+import '../modules/teacher/onboarding/teacher_onboarding_controller.dart';
 import '../modules/teacher/lesson_detail/teacher_lesson_detail_controller.dart';
 import '../modules/teacher/lessons/teacher_lessons_controller.dart';
 import '../modules/teacher/manual_quiz/teacher_manual_quiz_controller.dart';
@@ -44,11 +45,42 @@ import '../modules/teacher/quizzes/teacher_quizzes_controller.dart';
 import '../modules/teacher/students/teacher_students_controller.dart';
 import '../modules/teacher/student_detail/teacher_student_detail_controller.dart';
 import '../modules/teacher/profile/teacher_profile_controller.dart';
+import '../modules/teacher/leaderboard/teacher_leaderboard_controller.dart';
+
+// Student Controllers
+import '../modules/student/onboarding/student_onboarding_controller.dart';
+import '../modules/student/dashboard/student_dashboard_controller.dart';
+import '../modules/student/home/student_home_controller.dart';
+import '../modules/student/my_learning/student_my_learning_controller.dart';
+import '../modules/student/search/student_search_controller.dart';
+import '../modules/student/lesson_detail/student_lesson_detail_controller.dart';
+import '../modules/student/sub_lesson/student_sub_lesson_controller.dart';
+import '../modules/student/quiz/student_quiz_controller.dart';
+import '../modules/student/quiz_summary/student_quiz_summary_controller.dart';
+import '../modules/student/rewards/student_rewards_controller.dart';
+import '../modules/student/profile/student_profile_controller.dart';
+import '../modules/student/subscription/student_subscription_controller.dart';
+import '../modules/student/math_solver/student_math_solver_controller.dart';
+import '../modules/student/self_paced/student_self_paced_controller.dart';
+
+// Parent Controllers
+import '../modules/parent/onboarding/parent_onboarding_controller.dart';
+import '../modules/parent/registration/parent_registration_controller.dart';
+import '../modules/parent/home/parent_home_controller.dart';
+import '../modules/parent/children_account/children_account_controller.dart';
+import '../modules/parent/add_child/add_child_controller.dart';
+import '../modules/parent/child_detail/child_detail_controller.dart';
+import '../modules/parent/profile/parent_profile_controller.dart';
+import '../modules/parent/subscription/parent_subscription_controller.dart';
+
+// Individual Controllers
+import '../modules/individual/home/individual_home_controller.dart';
 
 class AllControllerBindings extends Bindings {
   @override
   void dependencies() {
     // Lazy put all controllers centrally as specified in ARCHITECTURE.md
+    Get.lazyPut<TeacherLeaderboardController>(() => TeacherLeaderboardController(), fenix: true);
     Get.lazyPut<TeacherDashboardController>(() => TeacherDashboardController(), fenix: true);
     Get.lazyPut<TeacherHomeController>(() => TeacherHomeController(), fenix: true);
     Get.lazyPut<TeacherLessonsController>(() => TeacherLessonsController(), fenix: true);
@@ -66,7 +98,31 @@ class AllControllerBindings extends Bindings {
     Get.lazyPut<TeacherQuizLoadingController>(() => TeacherQuizLoadingController(), fenix: true);
     Get.lazyPut<TeacherFinalQuizController>(() => TeacherFinalQuizController(), fenix: true);
     Get.lazyPut<TeacherIntroductionController>(() => TeacherIntroductionController(), fenix: true);
+    Get.lazyPut<TeacherOnboardingController>(() => TeacherOnboardingController(), fenix: true);
     Get.lazyPut<TeacherRegistrationController>(() => TeacherRegistrationController(), fenix: true);
+    Get.lazyPut<StudentOnboardingController>(() => StudentOnboardingController(), fenix: true);
+    Get.lazyPut<StudentDashboardController>(() => StudentDashboardController(), fenix: true);
+    Get.lazyPut<StudentHomeController>(() => StudentHomeController(), fenix: true);
+    Get.lazyPut<StudentMyLearningController>(() => StudentMyLearningController(), fenix: true);
+    Get.lazyPut<StudentSearchController>(() => StudentSearchController(), fenix: true);
+    Get.lazyPut<StudentLessonDetailController>(() => StudentLessonDetailController(), fenix: true);
+    Get.lazyPut<StudentSubLessonController>(() => StudentSubLessonController(), fenix: true);
+    Get.lazyPut<StudentQuizController>(() => StudentQuizController(), fenix: true);
+    Get.lazyPut<StudentQuizSummaryController>(() => StudentQuizSummaryController(), fenix: true);
+    Get.lazyPut<StudentRewardsController>(() => StudentRewardsController(), fenix: true);
+    Get.lazyPut<StudentProfileController>(() => StudentProfileController(), fenix: true);
+    Get.lazyPut<StudentSubscriptionController>(() => StudentSubscriptionController(), fenix: true);
+    Get.lazyPut<StudentMathSolverController>(() => StudentMathSolverController(), fenix: true);
+    Get.lazyPut<StudentSelfPacedController>(() => StudentSelfPacedController(), fenix: true);
+    Get.lazyPut<ParentOnboardingController>(() => ParentOnboardingController(), fenix: true);
+    Get.lazyPut<ParentRegistrationController>(() => ParentRegistrationController(), fenix: true);
+    Get.lazyPut<ParentHomeController>(() => ParentHomeController(), fenix: true);
+    Get.lazyPut<ChildrenAccountController>(() => ChildrenAccountController(), fenix: true);
+    Get.lazyPut<AddChildController>(() => AddChildController(), fenix: true);
+    Get.lazyPut<ChildDetailController>(() => ChildDetailController(), fenix: true);
+    Get.lazyPut<ParentProfileController>(() => ParentProfileController(), fenix: true);
+    Get.lazyPut<ParentSubscriptionController>(() => ParentSubscriptionController(), fenix: true);
+    Get.lazyPut<IndividualHomeController>(() => IndividualHomeController(), fenix: true);
     Get.lazyPut<SplashController>(() => SplashController(), fenix: true);
     Get.lazyPut<OnboardingController>(() => OnboardingController(), fenix: true);
     Get.lazyPut<LoginSignupController>(() => LoginSignupController(), fenix: true);

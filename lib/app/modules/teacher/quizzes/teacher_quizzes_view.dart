@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../core/themes/app_textstyle.dart';
+import '../../../core/utils/app_assets.dart';
 import 'teacher_quiz_model.dart';
 import 'teacher_quizzes_controller.dart';
 
@@ -417,54 +419,122 @@ class TeacherQuizzesView extends GetView<TeacherQuizzesController> {
             ),
             const SizedBox(height: 12),
 
-            // Regenerate Quiz Button (Gradient Pill)
-            GestureDetector(
-              onTap: () => controller.onRegenerateQuiz(quiz),
-              child: Container(
-                height: 40,
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFE0F6FF),
-                      Color(0xFFFFFFFF),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(60),
-                  border: Border.all(
-                    color: const Color(0xFFE0F6FF),
-                    width: 1,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.03),
-                      offset: const Offset(0, 2),
-                      blurRadius: 3,
-                    ),
-                  ],
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.refresh,
-                      size: 16,
-                      color: Color(0xFF127FD2),
-                    ),
-                    SizedBox(width: 7),
-                    Text(
-                      'Regenerate Quiz',
-                      style: TextStyle(
-                        fontFamily: fontFamily,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF191C1D),
+            // Action Buttons Row: Regenerate Quiz + Leaderboard
+            Row(
+              children: [
+                // Regenerate Quiz Button (Gradient Pill)
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => controller.onRegenerateQuiz(quiz),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFFE0F6FF),
+                            Color(0xFFFFFFFF),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(60),
+                        border: Border.all(
+                          color: const Color(0xFFE0F6FF),
+                          width: 1,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.03),
+                            offset: const Offset(0, 2),
+                            blurRadius: 3,
+                          ),
+                        ],
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.refresh,
+                            size: 16,
+                            color: Color(0xFF127FD2),
+                          ),
+                          SizedBox(width: 6),
+                          Flexible(
+                            child: Text(
+                              'Regenerate Quiz',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontFamily: fontFamily,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF191C1D),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
+                const SizedBox(width: 10),
+
+                // Leaderboard Button (Blue Gradient Pill)
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () => controller.onOpenLeaderboard(quiz),
+                    child: Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color(0xFF127FD2),
+                            Color(0xFF0E5E9B),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(60),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF127FD2).withValues(alpha: 0.25),
+                            offset: const Offset(0, 2),
+                            blurRadius: 4,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.iconRankingPodium,
+                            width: 16,
+                            height: 14,
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          const Flexible(
+                            child: Text(
+                              'Leaderboard',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontFamily: fontFamily,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

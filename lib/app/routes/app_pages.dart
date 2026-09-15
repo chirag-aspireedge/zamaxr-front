@@ -48,6 +48,54 @@ import '../modules/teacher/quizzes/teacher_quizzes_view.dart';
 import '../modules/teacher/students/teacher_students_view.dart';
 import '../modules/teacher/student_detail/teacher_student_detail_view.dart';
 import '../modules/teacher/profile/teacher_profile_view.dart';
+import '../modules/teacher/leaderboard/teacher_leaderboard_view.dart';
+import '../modules/teacher/onboarding/teacher_onboarding_binding.dart';
+import '../modules/teacher/onboarding/teacher_onboarding_view.dart';
+
+// Student Views
+import '../modules/student/onboarding/student_onboarding_view.dart';
+import '../modules/student/dashboard/student_dashboard_view.dart';
+import '../modules/student/home/student_home_view.dart';
+import '../modules/student/my_learning/student_my_learning_view.dart';
+import '../modules/student/search/student_search_view.dart';
+import '../modules/student/lesson_detail/student_lesson_detail_view.dart';
+import '../modules/student/sub_lesson/student_sub_lesson_view.dart';
+import '../modules/student/quiz/student_quiz_view.dart';
+import '../modules/student/quiz_summary/student_quiz_summary_view.dart';
+import '../modules/student/ar_learning/student_ar_learning_binding.dart';
+import '../modules/student/ar_learning/student_ar_learning_view.dart';
+import '../modules/student/vr_videos/student_vr_videos_binding.dart';
+import '../modules/student/vr_videos/student_vr_videos_view.dart';
+import '../modules/student/ai_tutor/student_ai_tutor_binding.dart';
+import '../modules/student/ai_tutor/student_ai_tutor_view.dart';
+import '../modules/student/rewards/student_rewards_binding.dart';
+import '../modules/student/rewards/student_rewards_view.dart';
+import '../modules/student/profile/student_profile_binding.dart';
+import '../modules/student/profile/student_profile_view.dart';
+import '../modules/student/subscription/student_subscription_binding.dart';
+import '../modules/student/subscription/student_subscription_view.dart';
+import '../modules/student/math_solver/student_math_solver_binding.dart';
+import '../modules/student/math_solver/student_math_solver_view.dart';
+import '../modules/student/self_paced/student_self_paced_binding.dart';
+import '../modules/student/self_paced/student_self_paced_view.dart';
+import '../modules/parent/onboarding/parent_onboarding_binding.dart';
+import '../modules/parent/onboarding/parent_onboarding_view.dart';
+import '../modules/parent/registration/parent_registration_binding.dart';
+import '../modules/parent/registration/parent_registration_view.dart';
+import '../modules/parent/home/parent_home_binding.dart';
+import '../modules/parent/home/parent_home_view.dart';
+import '../modules/parent/children_account/children_account_binding.dart';
+import '../modules/parent/children_account/children_account_view.dart';
+import '../modules/parent/add_child/add_child_binding.dart';
+import '../modules/parent/add_child/add_child_view.dart';
+import '../modules/parent/child_detail/child_detail_binding.dart';
+import '../modules/parent/child_detail/child_detail_view.dart';
+import '../modules/parent/profile/parent_profile_binding.dart';
+import '../modules/parent/profile/parent_profile_view.dart';
+import '../modules/parent/subscription/parent_subscription_binding.dart';
+import '../modules/parent/subscription/parent_subscription_view.dart';
+import '../modules/individual/home/individual_home_binding.dart';
+import '../modules/individual/home/individual_home_view.dart';
 
 abstract class Routes {
   Routes._();
@@ -58,6 +106,33 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const SELECT_ROLE = _Paths.SELECT_ROLE;
   static const REGISTRATION = _Paths.REGISTRATION;
+  static const INDIVIDUAL_HOME = _Paths.INDIVIDUAL_HOME;
+  static const PARENT_ONBOARDING = _Paths.PARENT_ONBOARDING;
+  static const PARENT_REGISTRATION = _Paths.PARENT_REGISTRATION;
+  static const PARENT_HOME = _Paths.PARENT_HOME;
+  static const PARENT_CHILDREN_ACCOUNT = _Paths.PARENT_CHILDREN_ACCOUNT;
+  static const PARENT_ADD_CHILD = _Paths.PARENT_ADD_CHILD;
+  static const PARENT_CHILD_DETAIL = _Paths.PARENT_CHILD_DETAIL;
+  static const PARENT_PROFILE = _Paths.PARENT_PROFILE;
+  static const PARENT_SUBSCRIPTION = _Paths.PARENT_SUBSCRIPTION;
+  static const STUDENT_ONBOARDING = _Paths.STUDENT_ONBOARDING;
+  static const STUDENT_DASHBOARD = _Paths.STUDENT_DASHBOARD;
+  static const STUDENT_HOME = _Paths.STUDENT_HOME;
+  static const STUDENT_MY_LEARNING = _Paths.STUDENT_MY_LEARNING;
+  static const STUDENT_SEARCH = _Paths.STUDENT_SEARCH;
+  static const STUDENT_LESSON_DETAIL = _Paths.STUDENT_LESSON_DETAIL;
+  static const STUDENT_SUB_LESSON = _Paths.STUDENT_SUB_LESSON;
+  static const STUDENT_QUIZ = _Paths.STUDENT_QUIZ;
+  static const STUDENT_QUIZ_SUMMARY = _Paths.STUDENT_QUIZ_SUMMARY;
+  static const STUDENT_AR_LEARNING = _Paths.STUDENT_AR_LEARNING;
+  static const STUDENT_VR_VIDEOS = _Paths.STUDENT_VR_VIDEOS;
+  static const STUDENT_AI_TUTOR = _Paths.STUDENT_AI_TUTOR;
+  static const STUDENT_REWARDS = _Paths.STUDENT_REWARDS;
+  static const STUDENT_PROFILE = _Paths.STUDENT_PROFILE;
+  static const STUDENT_SUBSCRIPTION = _Paths.STUDENT_SUBSCRIPTION;
+  static const STUDENT_MATH_SOLVER = _Paths.STUDENT_MATH_SOLVER;
+  static const STUDENT_SELF_PACED = _Paths.STUDENT_SELF_PACED;
+  static const TEACHER_ONBOARDING = _Paths.TEACHER_ONBOARDING;
   static const TEACHER_INTRODUCTION = _Paths.TEACHER_INTRODUCTION;
   static const TEACHER_REGISTRATION = _Paths.TEACHER_REGISTRATION;
   static const TEACHER_DASHBOARD = _Paths.TEACHER_DASHBOARD;
@@ -85,6 +160,8 @@ abstract class Routes {
   static const TEACHER_STUDENT_DETAIL = _Paths.TEACHER_STUDENT_DETAIL;
   static const STUDENT_DETAIL = _Paths.STUDENT_DETAIL;
   static const TEACHER_PROFILE = _Paths.TEACHER_PROFILE;
+  static const TEACHER_LEADERBOARD = _Paths.TEACHER_LEADERBOARD;
+  static const LEADERBOARD = _Paths.LEADERBOARD;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const CLASSES = _Paths.CLASSES;
   static const CLASS_DETAIL = _Paths.CLASS_DETAIL;
@@ -111,6 +188,33 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const SELECT_ROLE = '/select-role';
   static const REGISTRATION = '/registration';
+  static const INDIVIDUAL_HOME = '/individual/home';
+  static const PARENT_ONBOARDING = '/parent/onboarding';
+  static const PARENT_REGISTRATION = '/parent/registration';
+  static const PARENT_HOME = '/parent/home';
+  static const PARENT_CHILDREN_ACCOUNT = '/parent/children-account';
+  static const PARENT_ADD_CHILD = '/parent/add-child';
+  static const PARENT_CHILD_DETAIL = '/parent/child-detail';
+  static const PARENT_PROFILE = '/parent/profile';
+  static const PARENT_SUBSCRIPTION = '/parent/subscription';
+  static const STUDENT_ONBOARDING = '/student/onboarding';
+  static const STUDENT_DASHBOARD = '/student/dashboard';
+  static const STUDENT_HOME = '/student/home';
+  static const STUDENT_MY_LEARNING = '/student/my-learning';
+  static const STUDENT_SEARCH = '/student/search';
+  static const STUDENT_LESSON_DETAIL = '/student/lesson-detail';
+  static const STUDENT_SUB_LESSON = '/student/sub-lesson';
+  static const STUDENT_QUIZ = '/student/quiz';
+  static const STUDENT_QUIZ_SUMMARY = '/student/quiz-summary';
+  static const STUDENT_AR_LEARNING = '/student/ar-learning';
+  static const STUDENT_VR_VIDEOS = '/student/vr-videos';
+  static const STUDENT_AI_TUTOR = '/student/ai-tutor';
+  static const STUDENT_REWARDS = '/student/rewards';
+  static const STUDENT_PROFILE = '/student/profile';
+  static const STUDENT_SUBSCRIPTION = '/student/subscription';
+  static const STUDENT_MATH_SOLVER = '/student/math-solver';
+  static const STUDENT_SELF_PACED = '/student/self-paced';
+  static const TEACHER_ONBOARDING = '/teacher/onboarding';
   static const TEACHER_INTRODUCTION = '/teacher/introduction';
   static const TEACHER_REGISTRATION = '/teacher/registration';
   static const TEACHER_DASHBOARD = '/teacher/dashboard';
@@ -137,7 +241,9 @@ abstract class _Paths {
   static const STUDENTS = '/students';
   static const TEACHER_STUDENT_DETAIL = '/teacher/student-detail';
   static const STUDENT_DETAIL = '/student-detail';
-  static const TEACHER_PROFILE = '/teacher/profile';
+  static const TEACHER_PROFILE = '/teacher-profile';
+  static const TEACHER_LEADERBOARD = '/teacher-leaderboard';
+  static const LEADERBOARD = '/leaderboard';
   static const DASHBOARD = '/dashboard';
   static const CLASSES = '/classes';
   static const CLASS_DETAIL = '/class-detail';
@@ -194,6 +300,159 @@ class AppPages {
     GetPage(
       name: _Paths.REGISTRATION,
       page: () => const RegistrationView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_ONBOARDING,
+      page: () => const ParentOnboardingView(),
+      binding: ParentOnboardingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_REGISTRATION,
+      page: () => const ParentRegistrationView(),
+      binding: ParentRegistrationBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_HOME,
+      page: () => const ParentHomeView(),
+      binding: ParentHomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_CHILDREN_ACCOUNT,
+      page: () => const ChildrenAccountView(),
+      binding: ChildrenAccountBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_ADD_CHILD,
+      page: () => const AddChildView(),
+      binding: AddChildBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_CHILD_DETAIL,
+      page: () => const ChildDetailView(),
+      binding: ChildDetailBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_PROFILE,
+      page: () => const ParentProfileView(),
+      binding: ParentProfileBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_SUBSCRIPTION,
+      page: () => const ParentSubscriptionView(),
+      binding: ParentSubscriptionBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.INDIVIDUAL_HOME,
+      page: () => const IndividualHomeView(),
+      binding: IndividualHomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_ONBOARDING,
+      page: () => const StudentOnboardingView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_DASHBOARD,
+      page: () => const StudentDashboardView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_HOME,
+      page: () => const StudentHomeView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_MY_LEARNING,
+      page: () => const StudentMyLearningView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SEARCH,
+      page: () => const StudentSearchView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_LESSON_DETAIL,
+      page: () => const StudentLessonDetailView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SUB_LESSON,
+      page: () => const StudentSubLessonView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_QUIZ,
+      page: () => const StudentQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_QUIZ_SUMMARY,
+      page: () => const StudentQuizSummaryView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_AR_LEARNING,
+      page: () => const StudentArLearningView(),
+      binding: StudentArLearningBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_VR_VIDEOS,
+      page: () => const StudentVrVideosView(),
+      binding: StudentVrVideosBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_AI_TUTOR,
+      page: () => const StudentAiTutorView(),
+      binding: StudentAiTutorBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_REWARDS,
+      page: () => const StudentRewardsView(),
+      binding: StudentRewardsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_PROFILE,
+      page: () => const StudentProfileView(),
+      binding: StudentProfileBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SUBSCRIPTION,
+      page: () => const StudentSubscriptionView(),
+      binding: StudentSubscriptionBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_MATH_SOLVER,
+      page: () => const StudentMathSolverView(),
+      binding: StudentMathSolverBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.STUDENT_SELF_PACED,
+      page: () => const StudentSelfPacedView(),
+      binding: StudentSelfPacedBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TEACHER_ONBOARDING,
+      page: () => const TeacherOnboardingView(),
+      binding: TeacherOnboardingBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
@@ -329,6 +588,16 @@ class AppPages {
     GetPage(
       name: _Paths.TEACHER_PROFILE,
       page: () => const TeacherProfileView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.TEACHER_LEADERBOARD,
+      page: () => const TeacherLeaderboardView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.LEADERBOARD,
+      page: () => const TeacherLeaderboardView(),
       transition: Transition.fadeIn,
     ),
     GetPage(

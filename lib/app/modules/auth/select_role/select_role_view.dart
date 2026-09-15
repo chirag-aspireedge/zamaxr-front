@@ -104,7 +104,12 @@ class SelectRoleView extends GetView<SelectRoleController> {
 
   Widget _buildRoleCard(RoleItem item, bool isSelected) {
     return GestureDetector(
-      onTap: () => controller.selectRole(item.role),
+      onTap: () {
+        controller.selectRole(item.role);
+        if (item.role == UserRole.student) {
+          controller.continueWithRole();
+        }
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOut,

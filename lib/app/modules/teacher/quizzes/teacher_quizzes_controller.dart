@@ -107,6 +107,17 @@ class TeacherQuizzesController extends GetxController {
     );
   }
 
+  void onOpenLeaderboard(TeacherQuizModel quiz) {
+    if (Get.testMode || Get.context == null) return;
+
+    Get.toNamed(
+      Routes.TEACHER_LEADERBOARD,
+      arguments: {
+        'quiz': quiz,
+      },
+    );
+  }
+
   void onCreateNewQuiz() {
     if (Get.testMode || Get.context == null) return;
     Get.toNamed(Routes.TEACHER_CREATE_QUIZ);

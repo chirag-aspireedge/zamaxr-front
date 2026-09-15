@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -21,17 +22,16 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. App Bar: Circular Back Button with Shadow + Student Name
+              // 1. Header: Back Button + Student Name (Figma: top: 74px, 44x44, gap: 14px)
               Padding(
                 padding: const EdgeInsets.only(
                   left: 24.0,
                   right: 24.0,
                   top: 16.0,
-                  bottom: 8.0,
                 ),
                 child: Row(
                   children: [
-                    // Ellipse 18: 44x44 Circular Back Button with Shadow
+                    // Ellipse 18: 44x44 Circular Back Button with Shadow (0px 4px 4px rgba(0, 0, 0, 0.1))
                     GestureDetector(
                       onTap: controller.onBack,
                       child: Container(
@@ -40,10 +40,6 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
-                          border: Border.all(
-                            color: const Color(0xFFF0F0F0),
-                            width: 0.8,
-                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withValues(alpha: 0.1),
@@ -63,7 +59,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                     ),
                     const SizedBox(width: 14),
 
-                    // Student Name
+                    // Sarah Johnson: 20px w600 per ARCHITECTURE.md main titles
                     Expanded(
                       child: Obx(
                         () => Text(
@@ -72,10 +68,10 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontFamily: fontFamily,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
                             color: Color(0xFF191C1D),
-                            height: 32 / 24,
+                            height: 26 / 20,
                           ),
                         ),
                       ),
@@ -84,32 +80,31 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 ),
               ),
 
-              // 2. Student ID + Dot + ACTIVE Badge
+              // 2. Student ID + Dot + ACTIVE Badge (13px w400, 11px w500 per ARCHITECTURE.md)
               Padding(
                 padding: const EdgeInsets.only(
                   left: 24.0,
                   right: 24.0,
-                  top: 4.0,
-                  bottom: 20.0,
+                  top: 24.0,
                 ),
                 child: Row(
                   children: [
-                    // STU-1024
+                    // STU-1024: 13px w400 per ARCHITECTURE.md secondary text
                     Obx(
                       () => Text(
                         controller.studentId.value,
                         style: const TextStyle(
                           fontFamily: fontFamily,
-                          fontSize: 16,
+                          fontSize: 13,
                           fontWeight: FontWeight.w400,
                           color: Color(0xFF414754),
-                          height: 24 / 16,
+                          height: 18 / 13,
                         ),
                       ),
                     ),
                     const SizedBox(width: 8),
 
-                    // Dot separator: 4x4
+                    // Dot separator: 4x4, #C1C6D7
                     Container(
                       width: 4,
                       height: 4,
@@ -120,7 +115,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                     ),
                     const SizedBox(width: 8),
 
-                    // ACTIVE pill chip
+                    // ACTIVE pill chip: 11px w500 per ARCHITECTURE.md micro badge
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -134,10 +129,11 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                         'ACTIVE',
                         style: TextStyle(
                           fontFamily: fontFamily,
-                          fontSize: 10,
+                          fontSize: 11,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 0.5,
                           color: Colors.white,
+                          height: 15 / 11,
                         ),
                       ),
                     ),
@@ -145,12 +141,17 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 ),
               ),
 
-              // 3. Contact Details Section
+              // 3. Contact Details Section (15px w500 per ARCHITECTURE.md section header)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                padding: const EdgeInsets.only(
+                  left: 24.0,
+                  right: 24.0,
+                  top: 20.0,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Contact Details title: 15px w500 per ARCHITECTURE.md
                     const Text(
                       'Contact Details',
                       style: TextStyle(
@@ -158,51 +159,52 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF191C1D),
-                        height: 26 / 15,
+                        height: 20 / 15,
                       ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 6),
 
-                    // Rectangle 110: Contact details container
+                    // Rectangle 110: 354x89px
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 14.0,
+                      padding: const EdgeInsets.only(
+                        left: 16.0,
+                        right: 16.0,
+                        top: 12.0,
+                        bottom: 12.0,
                       ),
                       decoration: BoxDecoration(
                         color: const Color(0xFFFBFBFB),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: const Color(0xFFF0F0F0),
-                          width: 0.8,
-                        ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // email: 14px w400
                           Obx(
                             () => Text(
                               controller.email.value,
                               style: const TextStyle(
                                 fontFamily: fontFamily,
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFF191C1D),
-                                height: 24 / 16,
+                                height: 20 / 14,
                               ),
                             ),
                           ),
                           const SizedBox(height: 6),
+
+                          // Parent: 13px w400 per ARCHITECTURE.md secondary text
                           Obx(
                             () => Text(
                               controller.parentContact.value,
                               style: const TextStyle(
                                 fontFamily: fontFamily,
-                                fontSize: 15,
+                                fontSize: 13,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xFF414754),
-                                height: 24 / 15,
+                                height: 18 / 13,
                               ),
                             ),
                           ),
@@ -213,11 +215,13 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 ),
               ),
 
-              // 4. Hero Banner: TOTAL SCORE Card (Gradient 135deg)
+              // 4. Hero Banner: TOTAL SCORE Card (Figma: top: 341px, 347x160px, gradient 135deg)
               Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 16.0,
+                width: double.infinity,
+                margin: const EdgeInsets.only(
+                  left: 27.5,
+                  right: 27.5,
+                  top: 14.0,
                 ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
@@ -233,11 +237,13 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 15,
+                      spreadRadius: -3,
                       offset: const Offset(0, 10),
                     ),
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.1),
                       blurRadius: 6,
+                      spreadRadius: -4,
                       offset: const Offset(0, 4),
                     ),
                   ],
@@ -245,16 +251,19 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 child: Stack(
                   clipBehavior: Clip.hardEdge,
                   children: [
-                    // Decorative blurry circle top right
+                    // Overlay+Blur: 128x128px, right: -64px, top: -64px, blur: 20px
                     Positioned(
-                      right: -30,
-                      top: -30,
-                      child: Container(
-                        width: 128,
-                        height: 128,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white.withValues(alpha: 0.1),
+                      right: -64,
+                      top: -64,
+                      child: ImageFiltered(
+                        imageFilter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          width: 128,
+                          height: 128,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0x1AFFFFFF),
+                          ),
                         ),
                       ),
                     ),
@@ -264,7 +273,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // TOTAL SCORE label
+                          // TOTAL SCORE: 12px / 16px, w700, letter-spacing: 0.6px, uppercase
                           const Text(
                             'TOTAL SCORE',
                             style: TextStyle(
@@ -278,7 +287,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                           ),
                           const SizedBox(height: 6),
 
-                          // Score + pts Row (FittedBox prevents overflow on narrow screens)
+                          // 2,450 (48px / 56px, w700) + pts (32px / 40px, w700, 56% white)
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             alignment: Alignment.centerLeft,
@@ -291,11 +300,11 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                                     controller.totalScore.value,
                                     style: const TextStyle(
                                       fontFamily: fontFamily,
-                                      fontSize: 48,
+                                      fontSize: 38,
                                       fontWeight: FontWeight.w700,
                                       letterSpacing: -0.96,
                                       color: Colors.white,
-                                      height: 1.1,
+                                      height: 46 / 38,
                                     ),
                                   ),
                                 ),
@@ -304,11 +313,11 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                                   'pts',
                                   style: TextStyle(
                                     fontFamily: fontFamily,
-                                    fontSize: 32,
+                                    fontSize: 22,
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: -0.32,
                                     color: Color(0x8FFFFFFF),
-                                    height: 1.1,
+                                    height: 28 / 22,
                                   ),
                                 ),
                               ],
@@ -316,15 +325,14 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                           ),
                           const SizedBox(height: 12),
 
-                          // Pill Tag: 12% from last week
+                          // Overlay Pill: 153.67x24px, rgba(0, 28, 58, 0.2), padding: 4px 8px, gap: 8px
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
+                              horizontal: 8,
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF001C3A)
-                                  .withValues(alpha: 0.2),
+                              color: const Color(0x33001C3A),
                               borderRadius: BorderRadius.circular(9999),
                             ),
                             child: Row(
@@ -333,9 +341,9 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                                 const Icon(
                                   Icons.arrow_upward_rounded,
                                   color: Colors.white,
-                                  size: 12,
+                                  size: 11,
                                 ),
-                                const SizedBox(width: 6),
+                                const SizedBox(width: 8),
                                 Flexible(
                                   child: Obx(
                                     () => Text(
@@ -347,6 +355,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w700,
                                         color: Colors.white,
+                                        height: 16 / 12,
                                       ),
                                     ),
                                   ),
@@ -361,15 +370,16 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 ),
               ),
 
-              // 5. Current Ranking Card
+              // 5. Current Ranking Card (Figma: top: 535px, left: 30px, right: 30px, height: 72px)
               GestureDetector(
                 onTap: controller.onRankingTap,
                 child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 24.0,
-                    vertical: 4.0,
-                  ),
                   constraints: const BoxConstraints(minHeight: 72),
+                  margin: const EdgeInsets.only(
+                    left: 30.0,
+                    right: 30.0,
+                    top: 34.0,
+                  ),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16.0,
                     vertical: 12.0,
@@ -377,10 +387,6 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: const Color(0xFFF0F0F0),
-                      width: 0.8,
-                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.05),
@@ -391,7 +397,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                   ),
                   child: Row(
                     children: [
-                      // Circular Ranking Badge
+                      // Circular Ranking Badge: 40x40px, #E0F6FF
                       Container(
                         width: 40,
                         height: 40,
@@ -413,7 +419,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                       ),
                       const SizedBox(width: 16),
 
-                      // Text Column
+                      // Text Column: Current Ranking (12px w700) + Rank #1 of 32 Students (16px w700)
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -435,10 +441,10 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                                 controller.currentRanking.value,
                                 style: const TextStyle(
                                   fontFamily: fontFamily,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
                                   color: Color(0xFF191C1D),
-                                  height: 24 / 16,
+                                  height: 20 / 15,
                                 ),
                               ),
                             ),
@@ -446,7 +452,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                         ),
                       ),
 
-                      // Blue chevron right
+                      // Blue chevron right: 7.4x12px, #0059BB
                       const Icon(
                         Icons.chevron_right_rounded,
                         color: Color(0xFF0059BB),
@@ -457,9 +463,9 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                 ),
               ),
 
-              // 6. View All Link Button
+              // 6. View All Link Button (14px w500 per ARCHITECTURE.md)
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.only(top: 24.0),
                 child: Center(
                   child: GestureDetector(
                     onTap: controller.onViewAllQuizzes,
@@ -467,39 +473,39 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                       'View All',
                       style: TextStyle(
                         fontFamily: fontFamily,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
                         color: Color(0xFF127FD2),
-                        height: 24 / 16,
+                        height: 20 / 14,
                       ),
                     ),
                   ),
                 ),
               ),
 
-              // 7. Recent Quizzes Header
+              // 7. Recent Quizzes Header (16px w600 per ARCHITECTURE.md section headers)
               const Padding(
-                padding: EdgeInsets.only(top: 8.0, bottom: 14.0),
+                padding: EdgeInsets.only(top: 24.0),
                 child: Center(
                   child: Text(
                     'Recent Quizzes',
                     style: TextStyle(
                       fontFamily: fontFamily,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                       color: Color(0xFF191C1D),
-                      height: 32 / 15,
+                      height: 22 / 16,
                     ),
                   ),
                 ),
               ),
 
-              // 8. Recent Quizzes List
+              // 8. Recent Quizzes List (Figma: top: 739px, 12px below header, gap: 8px between cards)
               Obx(
                 () => ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(bottom: 24.0),
+                  padding: const EdgeInsets.only(top: 12.0, bottom: 40.0),
                   itemCount: controller.recentQuizzes.length,
                   itemBuilder: (context, index) {
                     final quiz = controller.recentQuizzes[index];
@@ -524,20 +530,16 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
     return GestureDetector(
       onTap: () => controller.onQuizTap(quiz),
       child: Container(
-        height: 82,
+        height: 78,
         margin: const EdgeInsets.only(
           left: 23.0,
           right: 23.0,
-          bottom: 12.0,
+          bottom: 8.0,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
           color: const Color(0xFFFBFBFB),
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: const Color(0xFFF0F0F0),
-            width: 0.8,
-          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.05),
@@ -548,7 +550,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
         ),
         child: Row(
           children: [
-            // Icon in 40x40 container
+            // Icon in 40x40 container: #F8F9FA, border-radius: 8px
             Container(
               width: 40,
               height: 40,
@@ -577,7 +579,7 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
             ),
             const SizedBox(width: 16),
 
-            // Title & Status
+            // Title & Status (15px w500, 13px w400 per ARCHITECTURE.md)
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -589,16 +591,16 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontFamily: fontFamily,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
                       color: Color(0xFF191C1D),
-                      height: 24 / 16,
+                      height: 20 / 15,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Row(
                     children: [
-                      // 8x8 dot
+                      // 8x8 dot: #0E3856, border-radius: 9999px
                       Container(
                         width: 8,
                         height: 8,
@@ -615,10 +617,10 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontFamily: fontFamily,
-                            fontSize: 16,
+                            fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: Color(0xFF414754),
-                            height: 24 / 16,
+                            height: 18 / 13,
                           ),
                         ),
                       ),
@@ -628,27 +630,27 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
               ),
             ),
 
-            // Score e.g. 8/10
+            // Score e.g. 8/10 (15px w600 / 13px w400)
             RichText(
               textAlign: TextAlign.right,
               text: TextSpan(
                 text: scoreValue,
                 style: const TextStyle(
                   fontFamily: fontFamily,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
                   color: Color(0xFF127FD2),
-                  height: 24 / 16,
+                  height: 20 / 15,
                 ),
                 children: [
                   TextSpan(
                     text: maxScore,
                     style: const TextStyle(
                       fontFamily: fontFamily,
-                      fontSize: 16,
+                      fontSize: 13,
                       fontWeight: FontWeight.w400,
                       color: Color(0xFF414754),
-                      height: 24 / 16,
+                      height: 18 / 13,
                     ),
                   ),
                 ],
@@ -660,3 +662,4 @@ class TeacherStudentDetailView extends GetView<TeacherStudentDetailController> {
     );
   }
 }
+
