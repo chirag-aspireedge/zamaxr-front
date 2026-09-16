@@ -132,6 +132,7 @@ class ParentHomeController extends GetxController {
       icon: Icons.assignment_turned_in_rounded,
       iconBgColor: Color(0xFFD0E7EA),
       iconColor: Color(0xFF364A4D),
+      route: Routes.PARENT_QUIZZES,
     ),
     const ExploreModuleModel(
       id: 'ar_learning',

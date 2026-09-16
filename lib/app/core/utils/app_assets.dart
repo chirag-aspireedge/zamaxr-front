@@ -43,6 +43,9 @@ class AppAssets {
   static const String studentRewardCertificates = 'assets/images/student/reward_certificates.jpg';
   static const String studentProfileAlex = 'assets/images/student/student_profile_alex.jpg';
   static const String individualHeroArVr = 'assets/images/individual_hero_ar_vr.png';
+  static const String individualOnboard1 = 'assets/images/individual_onboarding_1.png';
+  static const String individualOnboard2 = 'assets/images/individual_onboarding_2.png';
+  static const String individualOnboard3 = 'assets/images/individual_onboarding_3.png';
   static const String searchEmptyState = 'assets/images/search_empty_state.jpg';
   static const String selfPacedBookHero = 'assets/images/self_paced_book_hero.png';
 

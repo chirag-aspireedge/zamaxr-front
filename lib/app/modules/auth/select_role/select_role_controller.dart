@@ -64,7 +64,7 @@ class SelectRoleController extends GetxController {
     } else if (selectedRole.value == UserRole.parent) {
       Get.toNamed(Routes.PARENT_ONBOARDING);
     } else if (selectedRole.value == UserRole.individual) {
-      Get.toNamed(Routes.INDIVIDUAL_HOME);
+      Get.toNamed(Routes.INDIVIDUAL_ONBOARDING);
     } else {
       Get.toNamed(Routes.REGISTRATION, arguments: selectedRole.value);
     }

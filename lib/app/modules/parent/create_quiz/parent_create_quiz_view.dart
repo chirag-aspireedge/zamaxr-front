@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/themes/app_textstyle.dart';
-import 'teacher_create_quiz_controller.dart';
+import 'parent_create_quiz_controller.dart';
 
-class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
-  const TeacherCreateQuizView({super.key});
+class ParentCreateQuizView extends GetView<ParentCreateQuizController> {
+  const ParentCreateQuizView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (!Get.isRegistered<TeacherCreateQuizController>()) {
-      Get.put(TeacherCreateQuizController());
+    if (!Get.isRegistered<ParentCreateQuizController>()) {
+      Get.put(ParentCreateQuizController());
     }
 
     return Scaffold(
@@ -63,9 +63,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // ---------------------------------------------------------------------------
   // Top Navigation Bar
-  // ---------------------------------------------------------------------------
   Widget _buildTopBar() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -89,30 +87,36 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
               ),
             ),
           ),
+          const SizedBox(width: 8),
+          const Text(
+            'Create Quiz',
+            style: TextStyle(
+              fontFamily: AppTextStyle.fontFamily,
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF191C1D),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  // ---------------------------------------------------------------------------
-  // Heading: "How would you like to create your quiz?"
-  // ---------------------------------------------------------------------------
+  // Heading
   Widget _buildHeading() {
     return const Text(
       'How would you like to\ncreate your quiz?',
       style: TextStyle(
         fontFamily: AppTextStyle.fontFamily,
         fontSize: 24,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w600,
         color: Color(0xFF191C1D),
         height: 32 / 24,
       ),
     );
   }
 
-  // ---------------------------------------------------------------------------
   // Two Mode Selection Cards (Manual vs AI)
-  // ---------------------------------------------------------------------------
   Widget _buildModeSelectionCards() {
     return Obx(() {
       final isManual = controller.selectedMode.value == QuizCreationMode.manual;
@@ -150,7 +154,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Top Row: Icon + Radio
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -159,7 +162,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                           color: Color(0xFF127FD2),
                           size: 24,
                         ),
-                        // Radio circle
                         Container(
                           width: 16,
                           height: 16,
@@ -175,8 +177,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                       ],
                     ),
                     const SizedBox(height: 16),
-
-                    // Title
                     const Text(
                       'Manual Creation',
                       maxLines: 1,
@@ -184,15 +184,12 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                       style: TextStyle(
                         fontFamily: AppTextStyle.fontFamily,
                         fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF191C1D),
                         letterSpacing: 0.14,
-                        height: 20 / 14,
                       ),
                     ),
                     const SizedBox(height: 4),
-
-                    // Subtitle
                     const Text(
                       'Create and edit questions yourself',
                       maxLines: 2,
@@ -202,7 +199,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF414754),
-                        height: 16 / 12,
                       ),
                     ),
                   ],
@@ -241,7 +237,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Top Row: Icon + Radio
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -250,7 +245,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                           color: isAi ? const Color(0xFF127FD2) : const Color(0xFF476083),
                           size: 22,
                         ),
-                        // Radio circle
                         Container(
                           width: 16,
                           height: 16,
@@ -266,8 +260,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                       ],
                     ),
                     const SizedBox(height: 16),
-
-                    // Title
                     const Text(
                       'Create with AI',
                       maxLines: 1,
@@ -275,15 +267,12 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                       style: TextStyle(
                         fontFamily: AppTextStyle.fontFamily,
                         fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: Color(0xFF191C1D),
                         letterSpacing: 0.14,
-                        height: 20 / 14,
                       ),
                     ),
                     const SizedBox(height: 4),
-
-                    // Subtitle
                     const Text(
                       'Let AI generate quiz questions for you',
                       maxLines: 2,
@@ -293,7 +282,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                         color: Color(0xFF414754),
-                        height: 16 / 12,
                       ),
                     ),
                   ],
@@ -306,9 +294,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     });
   }
 
-  // ---------------------------------------------------------------------------
-  // Section Title Row (e.g. "Manual Creation" + "0 Questions" pill badge)
-  // ---------------------------------------------------------------------------
+  // Section Title Row
   Widget _buildSectionTitleRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -320,15 +306,12 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                 : 'AI Generation',
             style: const TextStyle(
               fontFamily: AppTextStyle.fontFamily,
-              fontSize: 24,
-              fontWeight: FontWeight.w400,
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
               color: Color(0xFF191C1D),
-              height: 32 / 24,
             ),
           ),
         ),
-
-        // Pill Badge: "X Questions"
         Obx(
           () => Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
@@ -340,11 +323,9 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
               '${controller.questions.length} ${controller.questions.length == 1 ? "Question" : "Questions"}',
               style: const TextStyle(
                 fontFamily: AppTextStyle.fontFamily,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
                 color: Color(0xFF414754),
-                letterSpacing: 0.14,
-                height: 20 / 14,
               ),
             ),
           ),
@@ -353,9 +334,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // ---------------------------------------------------------------------------
   // Central Builder / Questions Area
-  // ---------------------------------------------------------------------------
   Widget _buildQuestionBuilderArea() {
     return Obx(() {
       final isAi = controller.selectedMode.value == QuizCreationMode.ai;
@@ -368,7 +347,6 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
         return _buildManualEmptyState();
       }
 
-      // If questions are present, display the list of questions
       return Column(
         children: [
           ...controller.questions.asMap().entries.map((entry) {
@@ -383,7 +361,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     });
   }
 
-  // Manual Empty State matching SVG exactly
+  // Manual Empty State
   Widget _buildManualEmptyState() {
     return SizedBox(
       width: double.infinity,
@@ -393,25 +371,31 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Exact SVG Note with Plus Icon
-            const _StartBuildingIcon(),
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF1F5F9),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Icon(
+                Icons.post_add_rounded,
+                size: 28,
+                color: Color(0xFF414754),
+              ),
+            ),
             const SizedBox(height: 16),
-
-            // "Start Building"
             const Text(
               'Start Building',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: AppTextStyle.fontFamily,
-                fontSize: 24,
-                fontWeight: FontWeight.w400,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
                 color: Color(0xFF191C1D),
-                height: 32 / 24,
               ),
             ),
             const SizedBox(height: 8),
-
-            // Subtitle
             const SizedBox(
               width: 250,
               child: Text(
@@ -419,16 +403,13 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF414754),
-                  height: 24 / 16,
                 ),
               ),
             ),
-            const SizedBox(height: 32),
-
-            // Button: "+ ADD QUESTION"
+            const SizedBox(height: 28),
             _buildAddQuestionOutlineButton(),
           ],
         ),
@@ -436,7 +417,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // AI Empty State with Generate trigger
+  // AI Empty State
   Widget _buildAiEmptyState() {
     return SizedBox(
       width: double.infinity,
@@ -457,28 +438,26 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: AppTextStyle.fontFamily,
-                fontSize: 24,
-                fontWeight: FontWeight.w400,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
                 color: Color(0xFF191C1D),
-                height: 32 / 24,
               ),
             ),
             const SizedBox(height: 8),
             const SizedBox(
               width: 280,
               child: Text(
-                'Let AI generate questions based on the lesson curriculum automatically.',
+                'Let AI generate questions based on curriculum automatically.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF414754),
-                  height: 24 / 16,
                 ),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 28),
             Obx(() {
               if (controller.isGeneratingAi.value) {
                 return const CircularProgressIndicator(color: Color(0xFF127FD2));
@@ -493,10 +472,10 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: const Color(0xFF127FD2), width: 1),
                   ),
-                  child: Row(
+                  child: const Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Icon(Icons.auto_awesome, color: Color(0xFF127FD2), size: 16),
                       SizedBox(width: 8),
                       Text(
@@ -504,7 +483,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                         style: TextStyle(
                           fontFamily: AppTextStyle.fontFamily,
                           fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           color: Color(0xFF127FD2),
                           letterSpacing: 0.14,
                         ),
@@ -520,7 +499,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // Outline button: "+ ADD QUESTION"
+  // Add Question Button
   Widget _buildAddQuestionOutlineButton() {
     return Center(
       child: GestureDetector(
@@ -533,10 +512,10 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: const Color(0xFF717786), width: 1),
           ),
-          child: Row(
+          child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [
+            children: [
               Icon(
                 Icons.add,
                 color: Color(0xFF476083),
@@ -548,10 +527,9 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                 style: TextStyle(
                   fontFamily: AppTextStyle.fontFamily,
                   fontSize: 14,
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w500,
                   color: Color(0xFF476083),
                   letterSpacing: 0.14,
-                  height: 20 / 14,
                 ),
               ),
             ],
@@ -601,7 +579,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
             item.question,
             style: const TextStyle(
               fontFamily: AppTextStyle.fontFamily,
-              fontSize: 15,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               color: Color(0xFF191C1D),
             ),
@@ -639,14 +617,11 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // ---------------------------------------------------------------------------
   // Assessment Settings Section
-  // ---------------------------------------------------------------------------
   Widget _buildAssessmentSettingsSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section Header Row
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -654,29 +629,18 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
               'ASSESSMENT SETTINGS',
               style: TextStyle(
                 fontFamily: AppTextStyle.fontFamily,
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
                 color: Color(0xFF191C1D),
                 letterSpacing: 0.7,
-                height: 20 / 14,
               ),
             ),
             GestureDetector(
               onTap: controller.onEditSettings,
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.transparent,
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.edit_outlined,
-                    color: Color(0xFF414754),
-                    size: 18,
-                  ),
-                ),
+              child: const Icon(
+                Icons.edit_outlined,
+                color: Color(0xFF414754),
+                size: 18,
               ),
             ),
           ],
@@ -701,10 +665,9 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                     controller.duration.value,
                     style: const TextStyle(
                       fontFamily: AppTextStyle.fontFamily,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
                       color: Color(0xFF191C1D),
-                      height: 24 / 16,
                     ),
                   ),
                 ),
@@ -713,7 +676,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
           ),
         ),
 
-        // Row 2: Roster
+        // Row 2: Assigned child
         GestureDetector(
           onTap: controller.onSelectRoster,
           child: Padding(
@@ -721,7 +684,7 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
             child: Row(
               children: [
                 const Icon(
-                  Icons.school_outlined,
+                  Icons.face_rounded,
                   color: Color(0xFF414754),
                   size: 20,
                 ),
@@ -731,10 +694,9 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                     controller.roster.value,
                     style: const TextStyle(
                       fontFamily: AppTextStyle.fontFamily,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
                       color: Color(0xFF191C1D),
-                      height: 24 / 16,
                     ),
                   ),
                 ),
@@ -761,10 +723,9 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
                     controller.linked3DModels.value,
                     style: const TextStyle(
                       fontFamily: AppTextStyle.fontFamily,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400,
                       color: Color(0xFF476083),
-                      height: 24 / 16,
                     ),
                   ),
                 ),
@@ -776,15 +737,13 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 
-  // ---------------------------------------------------------------------------
   // Bottom Save Draft Button
-  // ---------------------------------------------------------------------------
   Widget _buildSaveDraftButton() {
     return GestureDetector(
       onTap: controller.onSaveDraft,
       child: Container(
         width: double.infinity,
-        height: 54,
+        height: 52,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(74),
           gradient: const LinearGradient(
@@ -808,8 +767,8 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
             'Save Draft',
             style: TextStyle(
               fontFamily: AppTextStyle.fontFamily,
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
               color: Colors.white,
               letterSpacing: 0.3,
             ),
@@ -819,98 +778,3 @@ class TeacherCreateQuizView extends GetView<TeacherCreateQuizController> {
     );
   }
 }
-
-typedef CreateQuizView = TeacherCreateQuizView;
-
-class _StartBuildingIcon extends StatelessWidget {
-  const _StartBuildingIcon();
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(28, 28),
-      painter: _StartBuildingIconPainter(),
-    );
-  }
-}
-
-class _StartBuildingIconPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF414754)
-      ..style = PaintingStyle.fill;
-
-    final scale = size.width / 24.0;
-    canvas.save();
-    canvas.scale(scale);
-    canvas.translate(-189.5, -511.0);
-
-    final path = Path();
-    path.moveTo(192.167, 535);
-    path.cubicTo(191.433, 535, 190.806, 534.739, 190.283, 534.217);
-    path.cubicTo(189.761, 533.694, 189.5, 533.067, 189.5, 532.333);
-    path.lineTo(189.5, 513.667);
-    path.cubicTo(189.5, 512.933, 189.761, 512.306, 190.283, 511.783);
-    path.cubicTo(190.806, 511.261, 191.433, 511, 192.167, 511);
-    path.lineTo(204.167, 511);
-    path.lineTo(204.167, 513.667);
-    path.lineTo(192.167, 513.667);
-    path.lineTo(192.167, 532.333);
-    path.lineTo(210.833, 532.333);
-    path.lineTo(210.833, 520.333);
-    path.lineTo(213.5, 520.333);
-    path.lineTo(213.5, 532.333);
-    path.cubicTo(213.5, 533.067, 213.239, 533.694, 212.717, 534.217);
-    path.cubicTo(212.194, 534.739, 211.567, 535, 210.833, 535);
-    path.lineTo(192.167, 535);
-    path.close();
-
-    // Line 1
-    path.moveTo(196.167, 529.667);
-    path.lineTo(196.167, 527);
-    path.lineTo(206.833, 527);
-    path.lineTo(206.833, 529.667);
-    path.lineTo(196.167, 529.667);
-    path.close();
-
-    // Line 2
-    path.moveTo(196.167, 525.667);
-    path.lineTo(196.167, 523);
-    path.lineTo(206.833, 523);
-    path.lineTo(206.833, 525.667);
-    path.lineTo(196.167, 525.667);
-    path.close();
-
-    // Line 3
-    path.moveTo(196.167, 521.667);
-    path.lineTo(196.167, 519);
-    path.lineTo(206.833, 519);
-    path.lineTo(206.833, 521.667);
-    path.lineTo(196.167, 521.667);
-    path.close();
-
-    // Plus Icon
-    path.moveTo(208.167, 519);
-    path.lineTo(208.167, 516.333);
-    path.lineTo(205.5, 516.333);
-    path.lineTo(205.5, 513.667);
-    path.lineTo(208.167, 513.667);
-    path.lineTo(208.167, 511);
-    path.lineTo(210.833, 511);
-    path.lineTo(210.833, 513.667);
-    path.lineTo(213.5, 513.667);
-    path.lineTo(213.5, 516.333);
-    path.lineTo(210.833, 516.333);
-    path.lineTo(210.833, 519);
-    path.lineTo(208.167, 519);
-    path.close();
-
-    canvas.drawPath(path, paint);
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
-}
-

@@ -94,8 +94,17 @@ import '../modules/parent/profile/parent_profile_binding.dart';
 import '../modules/parent/profile/parent_profile_view.dart';
 import '../modules/parent/subscription/parent_subscription_binding.dart';
 import '../modules/parent/subscription/parent_subscription_view.dart';
+import '../modules/parent/quizzes/parent_quizzes_view.dart';
+import '../modules/parent/create_quiz/parent_create_quiz_view.dart';
+import '../modules/parent/ai_quiz/parent_ai_quiz_view.dart';
+import '../modules/parent/manual_quiz/parent_manual_quiz_view.dart';
+import '../modules/parent/review_quiz/parent_review_quiz_view.dart';
+import '../modules/parent/quiz_loading/parent_quiz_loading_view.dart';
+import '../modules/parent/final_quiz/parent_final_quiz_view.dart';
 import '../modules/individual/home/individual_home_binding.dart';
 import '../modules/individual/home/individual_home_view.dart';
+import '../modules/individual/onboarding/individual_onboarding_binding.dart';
+import '../modules/individual/onboarding/individual_onboarding_view.dart';
 
 abstract class Routes {
   Routes._();
@@ -106,6 +115,7 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const SELECT_ROLE = _Paths.SELECT_ROLE;
   static const REGISTRATION = _Paths.REGISTRATION;
+  static const INDIVIDUAL_ONBOARDING = _Paths.INDIVIDUAL_ONBOARDING;
   static const INDIVIDUAL_HOME = _Paths.INDIVIDUAL_HOME;
   static const PARENT_ONBOARDING = _Paths.PARENT_ONBOARDING;
   static const PARENT_REGISTRATION = _Paths.PARENT_REGISTRATION;
@@ -115,6 +125,13 @@ abstract class Routes {
   static const PARENT_CHILD_DETAIL = _Paths.PARENT_CHILD_DETAIL;
   static const PARENT_PROFILE = _Paths.PARENT_PROFILE;
   static const PARENT_SUBSCRIPTION = _Paths.PARENT_SUBSCRIPTION;
+  static const PARENT_QUIZZES = _Paths.PARENT_QUIZZES;
+  static const PARENT_CREATE_QUIZ = _Paths.PARENT_CREATE_QUIZ;
+  static const PARENT_AI_QUIZ = _Paths.PARENT_AI_QUIZ;
+  static const PARENT_MANUAL_QUIZ = _Paths.PARENT_MANUAL_QUIZ;
+  static const PARENT_REVIEW_QUIZ = _Paths.PARENT_REVIEW_QUIZ;
+  static const PARENT_QUIZ_LOADING = _Paths.PARENT_QUIZ_LOADING;
+  static const PARENT_FINAL_QUIZ = _Paths.PARENT_FINAL_QUIZ;
   static const STUDENT_ONBOARDING = _Paths.STUDENT_ONBOARDING;
   static const STUDENT_DASHBOARD = _Paths.STUDENT_DASHBOARD;
   static const STUDENT_HOME = _Paths.STUDENT_HOME;
@@ -188,6 +205,7 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const SELECT_ROLE = '/select-role';
   static const REGISTRATION = '/registration';
+  static const INDIVIDUAL_ONBOARDING = '/individual/onboarding';
   static const INDIVIDUAL_HOME = '/individual/home';
   static const PARENT_ONBOARDING = '/parent/onboarding';
   static const PARENT_REGISTRATION = '/parent/registration';
@@ -197,6 +215,13 @@ abstract class _Paths {
   static const PARENT_CHILD_DETAIL = '/parent/child-detail';
   static const PARENT_PROFILE = '/parent/profile';
   static const PARENT_SUBSCRIPTION = '/parent/subscription';
+  static const PARENT_QUIZZES = '/parent/quizzes';
+  static const PARENT_CREATE_QUIZ = '/parent/create-quiz';
+  static const PARENT_AI_QUIZ = '/parent/ai-quiz';
+  static const PARENT_MANUAL_QUIZ = '/parent/manual-quiz';
+  static const PARENT_REVIEW_QUIZ = '/parent/review-quiz';
+  static const PARENT_QUIZ_LOADING = '/parent/quiz-loading';
+  static const PARENT_FINAL_QUIZ = '/parent/final-quiz';
   static const STUDENT_ONBOARDING = '/student/onboarding';
   static const STUDENT_DASHBOARD = '/student/dashboard';
   static const STUDENT_HOME = '/student/home';
@@ -348,6 +373,47 @@ class AppPages {
       name: _Paths.PARENT_SUBSCRIPTION,
       page: () => const ParentSubscriptionView(),
       binding: ParentSubscriptionBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_QUIZZES,
+      page: () => const ParentQuizzesView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_CREATE_QUIZ,
+      page: () => const ParentCreateQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_AI_QUIZ,
+      page: () => const ParentAiQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_MANUAL_QUIZ,
+      page: () => const ParentManualQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_REVIEW_QUIZ,
+      page: () => const ParentReviewQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_QUIZ_LOADING,
+      page: () => const ParentQuizLoadingView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.PARENT_FINAL_QUIZ,
+      page: () => const ParentFinalQuizView(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.INDIVIDUAL_ONBOARDING,
+      page: () => const IndividualOnboardingView(),
+      binding: IndividualOnboardingBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

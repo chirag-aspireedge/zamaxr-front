@@ -75,6 +75,7 @@ import '../modules/parent/subscription/parent_subscription_controller.dart';
 
 // Individual Controllers
 import '../modules/individual/home/individual_home_controller.dart';
+import '../modules/individual/onboarding/individual_onboarding_controller.dart';
 
 class AllControllerBindings extends Bindings {
   @override
@@ -123,6 +124,7 @@ class AllControllerBindings extends Bindings {
     Get.lazyPut<ParentProfileController>(() => ParentProfileController(), fenix: true);
     Get.lazyPut<ParentSubscriptionController>(() => ParentSubscriptionController(), fenix: true);
     Get.lazyPut<IndividualHomeController>(() => IndividualHomeController(), fenix: true);
+    Get.lazyPut<IndividualOnboardingController>(() => IndividualOnboardingController(), fenix: true);
     Get.lazyPut<SplashController>(() => SplashController(), fenix: true);
     Get.lazyPut<OnboardingController>(() => OnboardingController(), fenix: true);
     Get.lazyPut<LoginSignupController>(() => LoginSignupController(), fenix: true);
