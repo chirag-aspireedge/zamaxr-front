@@ -137,7 +137,7 @@ class IndividualHomeController extends GetxController {
   }
 
   void onSearchTap() {
-    Get.toNamed(Routes.STUDENT_SEARCH);
+    currentNavIndex.value = 1;
   }
 
   void onExploreArVr() {
@@ -153,7 +153,7 @@ class IndividualHomeController extends GetxController {
   }
 
   void onOpenQuiz() {
-    Get.toNamed(Routes.STUDENT_QUIZ);
+    Get.toNamed(Routes.INDIVIDUAL_QUIZZES);
   }
 
   void onOpenRewards() {

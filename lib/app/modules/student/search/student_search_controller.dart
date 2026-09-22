@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../individual/home/individual_home_controller.dart';
 
 enum StudentSearchMediaType {
   video,
@@ -182,16 +183,15 @@ class StudentSearchController extends GetxController {
   bool get isSearching => query.value.isNotEmpty;
 
   List<StudentSearchResultModel> get searchResults {
-    if (!isSearching) return const [];
-
-    final q = query.value.toLowerCase();
+    final q = query.value.toLowerCase().trim();
     final filtered = initialResults.where((item) {
-      final matchesQuery = item.title.toLowerCase().contains(q) ||
-          item.category.toLowerCase().contains(q) ||
-          item.subject.toLowerCase().contains(q) ||
-          item.description.toLowerCase().contains(q);
-
-      if (!matchesQuery) return false;
+      if (q.isNotEmpty) {
+        final matchesQuery = item.title.toLowerCase().contains(q) ||
+            item.category.toLowerCase().contains(q) ||
+            item.subject.toLowerCase().contains(q) ||
+            item.description.toLowerCase().contains(q);
+        if (!matchesQuery) return false;
+      }
 
       if (selectedCategory.value == 'All') return true;
       if (selectedCategory.value == 'Lessons') return true;
@@ -210,11 +210,25 @@ class StudentSearchController extends GetxController {
 
   String get resultsCountSummary {
     final count = searchResults.length;
-    final term = query.value.isEmpty ? 'Photosynthesis' : query.value;
+    if (query.value.trim().isEmpty) {
+      return '$count topics available';
+    }
+    final term = query.value.trim();
     return '$count results found for "$term"';
   }
 
   void onBackTap() {
+    if (isSearching) {
+      clearSearch();
+      return;
+    }
+    if (Get.isRegistered<IndividualHomeController>()) {
+      final homeController = Get.find<IndividualHomeController>();
+      if (homeController.currentNavIndex.value == 1) {
+        homeController.currentNavIndex.value = 0;
+        return;
+      }
+    }
     Get.back();
   }
 

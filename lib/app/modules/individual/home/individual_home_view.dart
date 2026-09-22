@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../core/themes/app_textstyle.dart';
 import '../../../core/utils/app_assets.dart';
-import '../../student/my_learning/student_my_learning_view.dart';
+import '../../student/search/student_search_view.dart';
 import '../../student/profile/student_profile_view.dart';
 import '../../student/rewards/student_rewards_view.dart';
 import 'individual_home_controller.dart';
@@ -34,7 +34,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
                   index: controller.currentNavIndex.value,
                   children: [
                     _buildHomeContent(context),
-                    const StudentMyLearningView(),
+                    const StudentSearchView(),
                     const StudentRewardsView(showBottomNav: false),
                     const StudentProfileView(showBottomNav: false),
                   ],
@@ -66,9 +66,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
           _buildHeader(context),
           const SizedBox(height: 14),
 
-          // Search Bar (Rectangle 33)
-          _buildSearchBar(),
-          const SizedBox(height: 18),
+
 
           // 2. PRIMARY FEATURE: AR/VR Learning Hero Card
           _buildHeroCard(),
@@ -243,54 +241,6 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  // Search Field (Rectangle 33)
-  Widget _buildSearchBar() {
-    return GestureDetector(
-      onTap: controller.onSearchTap,
-      child: Container(
-        height: 44,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(22),
-          border: Border.all(
-            color: const Color(0xFFE0F6FF),
-            width: 1,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: [
-            Icon(
-              PhosphorIcons.magnifyingGlass(PhosphorIconsStyle.regular),
-              size: 18,
-              color: const Color(0xFF1567A2),
-            ),
-            const SizedBox(width: 10),
-            const Expanded(
-              child: Text(
-                'Search subject...',
-                style: TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF717786),
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

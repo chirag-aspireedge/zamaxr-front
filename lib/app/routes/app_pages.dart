@@ -105,6 +105,8 @@ import '../modules/individual/home/individual_home_binding.dart';
 import '../modules/individual/home/individual_home_view.dart';
 import '../modules/individual/onboarding/individual_onboarding_binding.dart';
 import '../modules/individual/onboarding/individual_onboarding_view.dart';
+import '../modules/individual/quizzes/individual_quizzes_binding.dart';
+import '../modules/individual/quizzes/individual_quizzes_view.dart';
 
 abstract class Routes {
   Routes._();
@@ -117,6 +119,7 @@ abstract class Routes {
   static const REGISTRATION = _Paths.REGISTRATION;
   static const INDIVIDUAL_ONBOARDING = _Paths.INDIVIDUAL_ONBOARDING;
   static const INDIVIDUAL_HOME = _Paths.INDIVIDUAL_HOME;
+  static const INDIVIDUAL_QUIZZES = _Paths.INDIVIDUAL_QUIZZES;
   static const PARENT_ONBOARDING = _Paths.PARENT_ONBOARDING;
   static const PARENT_REGISTRATION = _Paths.PARENT_REGISTRATION;
   static const PARENT_HOME = _Paths.PARENT_HOME;
@@ -207,6 +210,7 @@ abstract class _Paths {
   static const REGISTRATION = '/registration';
   static const INDIVIDUAL_ONBOARDING = '/individual/onboarding';
   static const INDIVIDUAL_HOME = '/individual/home';
+  static const INDIVIDUAL_QUIZZES = '/individual/quizzes';
   static const PARENT_ONBOARDING = '/parent/onboarding';
   static const PARENT_REGISTRATION = '/parent/registration';
   static const PARENT_HOME = '/parent/home';
@@ -420,6 +424,12 @@ class AppPages {
       name: _Paths.INDIVIDUAL_HOME,
       page: () => const IndividualHomeView(),
       binding: IndividualHomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.INDIVIDUAL_QUIZZES,
+      page: () => const IndividualQuizzesView(),
+      binding: IndividualQuizzesBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

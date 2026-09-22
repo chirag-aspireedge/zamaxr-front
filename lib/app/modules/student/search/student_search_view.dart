@@ -6,8 +6,14 @@ import '../../../core/themes/app_textstyle.dart';
 import '../../../core/utils/app_assets.dart';
 import 'student_search_controller.dart';
 
-class StudentSearchView extends GetView<StudentSearchController> {
-  const StudentSearchView({super.key});
+class StudentSearchView extends StatelessWidget {
+  final bool isTab;
+  const StudentSearchView({super.key, this.isTab = false});
+
+  StudentSearchController get controller =>
+      Get.isRegistered<StudentSearchController>()
+          ? Get.find<StudentSearchController>()
+          : Get.put(StudentSearchController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +27,9 @@ class StudentSearchView extends GetView<StudentSearchController> {
               padding: const EdgeInsets.fromLTRB(20, 12, 20, 8),
               child: _buildTopBar(context),
             ),
-            // Body: Reactive switch between Popular Searches & Search Results
+            // Body: Reactive Search Results
             Expanded(
-              child: Obx(() {
-                if (!controller.isSearching) {
-                  return _buildPopularSearches();
-                } else {
-                  return _buildSearchResults();
-                }
-              }),
+              child: Obx(() => _buildSearchResults()),
             ),
           ],
         ),
@@ -193,101 +193,7 @@ class StudentSearchView extends GetView<StudentSearchController> {
     );
   }
 
-  // State 1: Popular Searches Layout (Image 1)
-  Widget _buildPopularSearches() {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-      children: [
-        const Text(
-          'Popular Searches',
-          style: TextStyle(
-            fontFamily: AppTextStyle.fontFamily,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            letterSpacing: -0.2,
-            color: Color(0xFF191C1D),
-          ),
-        ),
-        const SizedBox(height: 16),
-        // Rounded History Card Container
-        Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFF3F4F5),
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.05),
-                blurRadius: 2,
-                offset: Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Column(
-            children: List.generate(
-              controller.popularSearches.length,
-              (index) {
-                final item = controller.popularSearches[index];
-                final isLast = index == controller.popularSearches.length - 1;
-                return Column(
-                  children: [
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () => controller.selectPopularSearch(item),
-                        borderRadius: BorderRadius.vertical(
-                          top: index == 0 ? const Radius.circular(12) : Radius.zero,
-                          bottom: isLast ? const Radius.circular(12) : Radius.zero,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 16,
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                PhosphorIcons.clockCounterClockwise(
-                                  PhosphorIconsStyle.regular,
-                                ),
-                                size: 16,
-                                color: const Color(0xFF414754),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontFamily: AppTextStyle.fontFamily,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xFF191C1D),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (!isLast)
-                      const Divider(
-                        height: 1,
-                        thickness: 1,
-                        indent: 48,
-                        endIndent: 0,
-                        color: Color(0xFFE1E3E4),
-                      ),
-                  ],
-                );
-              },
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  // State 2: Active Search Results Layout (Image 2 & CSS specs)
+  // Search & Explore Results Layout
   Widget _buildSearchResults() {
     final results = controller.searchResults;
 
@@ -296,17 +202,20 @@ class StudentSearchView extends GetView<StudentSearchController> {
     }
 
     return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+      physics: const BouncingScrollPhysics(),
+      padding: EdgeInsets.fromLTRB(20, 16, 20, isTab ? 110 : 32),
       children: [
         // Title & Count Subtitle
-        const Text(
-          'Search Results',
-          style: TextStyle(
-            fontFamily: AppTextStyle.fontFamily,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.14,
-            color: Color(0xFF414754),
+        Obx(
+          () => Text(
+            controller.isSearching ? 'Search Results' : 'Explore Topics',
+            style: const TextStyle(
+              fontFamily: AppTextStyle.fontFamily,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.14,
+              color: Color(0xFF414754),
+            ),
           ),
         ),
         const SizedBox(height: 4),
@@ -337,7 +246,7 @@ class StudentSearchView extends GetView<StudentSearchController> {
   Widget _buildNoResultsState() {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+      padding: EdgeInsets.fromLTRB(20, 24, 20, isTab ? 110 : 24),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
