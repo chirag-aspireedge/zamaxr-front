@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Zama XR',
+      title: 'ZamaXR',
       debugShowCheckedModeBanner: false,
       initialBinding: AllControllerBindings(),
       initialRoute: AppPages.INITIAL,

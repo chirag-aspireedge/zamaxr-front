@@ -1,6 +1,6 @@
 {
-    "name": "zama_xr",
-    "short_name": "zama_xr",
+    "name": "ZamaXR",
+    "short_name": "ZamaXR",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",
