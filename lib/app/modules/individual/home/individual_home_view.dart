@@ -1475,7 +1475,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Switch your STEM content, contextual lessons, and exam focus to your regional educational standard.',
+              'Switch your STEM content, interactive 3D simulations, and focus to your regional educational standard.',
               style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
             ),
             const SizedBox(height: 16),

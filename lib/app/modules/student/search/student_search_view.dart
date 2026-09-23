@@ -303,10 +303,12 @@ class StudentSearchView extends StatelessWidget {
           // Subtitle / Body text
           ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 280),
-            child: const Text(
-              "We couldn't find matches for your search. Try searching for another subject, lesson or topic.",
+            child: Text(
+              controller.isIndividual
+                  ? "We couldn't find matches for your search. Try searching for another subject, AR experience or topic."
+                  : "We couldn't find matches for your search. Try searching for another subject, lesson or topic.",
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: AppTextStyle.fontFamily,
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
@@ -557,7 +559,7 @@ class StudentSearchView extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      result.ctaText,
+                      controller.getCtaText(result),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(

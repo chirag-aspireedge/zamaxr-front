@@ -66,12 +66,21 @@ class StudentSearchController extends GetxController {
   final RxString selectedCategory = 'All'.obs;
   final RxBool hasUnreadNotifications = true.obs;
 
-  final List<String> categories = const [
-    'All',
-    'Lessons',
-    'Subjects',
-    'AR Experiences',
-  ];
+  bool get isIndividual => Get.isRegistered<IndividualHomeController>();
+
+  List<String> get categories => isIndividual
+      ? const [
+          'All',
+          'AR Experiences',
+          'VR Videos',
+          'Quizzes',
+        ]
+      : const [
+          'All',
+          'Lessons',
+          'Subjects',
+          'AR Experiences',
+        ];
 
   final List<String> popularSearches = const [
     'Biology',
@@ -202,6 +211,12 @@ class StudentSearchController extends GetxController {
       if (selectedCategory.value == 'AR Experiences') {
         return item.mediaBadges.any((b) => b.type == StudentSearchMediaType.ar);
       }
+      if (selectedCategory.value == 'VR Videos') {
+        return item.mediaBadges.any((b) => b.type == StudentSearchMediaType.video);
+      }
+      if (selectedCategory.value == 'Quizzes') {
+        return item.mediaBadges.any((b) => b.type == StudentSearchMediaType.quiz);
+      }
       return true;
     }).toList();
 
@@ -244,8 +259,34 @@ class StudentSearchController extends GetxController {
     }
   }
 
+  String getCtaText(StudentSearchResultModel result) {
+    if (!isIndividual) return result.ctaText;
+    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.ar)) {
+      return 'Explore in AR';
+    }
+    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.video)) {
+      return 'Watch in VR';
+    }
+    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.quiz)) {
+      return 'Take Quiz';
+    }
+    return 'Explore in AR';
+  }
+
   void onResultAction(StudentSearchResultModel result) {
     if (Get.context != null) {
+      if (isIndividual) {
+        if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.ar)) {
+          Get.toNamed(Routes.STUDENT_AR_LEARNING);
+        } else if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.video)) {
+          Get.toNamed(Routes.STUDENT_VR_VIDEOS);
+        } else if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.quiz)) {
+          Get.toNamed(Routes.INDIVIDUAL_QUIZZES);
+        } else {
+          Get.toNamed(Routes.STUDENT_AR_LEARNING);
+        }
+        return;
+      }
       Get.toNamed(Routes.STUDENT_LESSON_DETAIL, arguments: result);
     }
   }

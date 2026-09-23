@@ -48,7 +48,7 @@ class SelectRoleController extends GetxController {
     RoleItem(
       role: UserRole.individual,
       title: 'Individual',
-      description: 'Monitor student progress and stay connected with the school.',
+      description: 'Explore AR, VR, AI Tutor, Math Solver, and interactive Quizzes at your own pace.',
     ),
   ];
 

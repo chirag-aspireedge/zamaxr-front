@@ -83,9 +83,9 @@ class IndividualHomeController extends GetxController {
         description:
             'Regional biology modules contextualized with West African rainforest flora and plant systems.',
         duration: '15 mins',
-        actionLabel: 'Start',
+        actionLabel: 'Explore AR',
         onTap: () {
-          Get.toNamed(Routes.STUDENT_LESSON_DETAIL);
+          Get.toNamed(Routes.STUDENT_AR_LEARNING);
         },
       ),
       RecommendedModuleItem(

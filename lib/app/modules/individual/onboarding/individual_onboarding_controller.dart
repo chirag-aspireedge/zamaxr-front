@@ -23,19 +23,19 @@ class IndividualOnboardingController extends GetxController {
     IndividualOnboardingItem(
       title: 'Explore. Experience. Learn.',
       description:
-          'Step into immersive AR & VR learning experiences that make every lesson more engaging and interactive.',
+          'Step into immersive AR & VR learning experiences that make concepts visual, engaging, and interactive.',
       image: AppAssets.individualOnboard1,
     ),
     IndividualOnboardingItem(
-      title: 'Manage Learning in One Place',
+      title: 'AI Tutor & Math Solver',
       description:
-          'Access your classes, support student learning, track activities and help learners stay on track',
+          'Get instant step-by-step math solutions and 24/7 AI-guided learning assistance whenever you need help.',
       image: AppAssets.individualOnboard2,
     ),
     IndividualOnboardingItem(
-      title: 'Make Learning More Engaging',
+      title: 'Test Skills with Quizzes',
       description:
-          'Bring learning to life with interactive quizzes, AI-supported learning and immersive AR/VR experiences',
+          'Challenge yourself with customized quizzes across STEM topics and track your mastery at your own pace.',
       image: AppAssets.individualOnboard3,
     ),
   ];
