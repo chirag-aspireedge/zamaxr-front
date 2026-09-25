@@ -71,9 +71,11 @@ class StudentSearchController extends GetxController {
   List<String> get categories => isIndividual
       ? const [
           'All',
-          'AR Experiences',
-          'VR Videos',
+          'AR',
+          'VR',
+          'AI Tutor',
           'Quizzes',
+          'Math Solver',
         ]
       : const [
           'All',
@@ -153,6 +155,110 @@ class StudentSearchController extends GetxController {
     ),
   ];
 
+  // Individual Role: Feature-based results (No lessons/subjects)
+  final List<StudentSearchResultModel> individualFeatureResults = const [
+    StudentSearchResultModel(
+      id: 'feat_ar',
+      category: 'AR FEATURE',
+      title: 'AR',
+      description:
+          'Explore interactive 3D simulations and place 3D models directly in your physical environment.',
+      gradeLevel: 'Feature Tool',
+      subject: 'Interactive 3D',
+      hasProgress: false,
+      ctaText: 'Explore AR',
+      mediaBadges: [
+        StudentSearchMediaBadge(
+          type: StudentSearchMediaType.ar,
+          icon: PhosphorIconsFill.cube,
+          backgroundColor: Color(0xFF0059BB),
+          iconColor: Colors.white,
+          hasActiveGlow: true,
+        ),
+      ],
+    ),
+    StudentSearchResultModel(
+      id: 'feat_vr',
+      category: 'VR FEATURE',
+      title: 'VR',
+      description:
+          'Step into 360° virtual reality spaces, environments, and immersive spatial visual journeys.',
+      gradeLevel: 'Spatial Tool',
+      subject: '360° Spatial',
+      hasProgress: false,
+      ctaText: 'Explore VR',
+      mediaBadges: [
+        StudentSearchMediaBadge(
+          type: StudentSearchMediaType.video,
+          icon: PhosphorIconsFill.playCircle,
+          backgroundColor: Color(0xFF7C3AED),
+          iconColor: Colors.white,
+          hasActiveGlow: true,
+        ),
+      ],
+    ),
+    StudentSearchResultModel(
+      id: 'feat_ai_tutor',
+      category: 'AI TUTOR',
+      title: 'AI Tutor',
+      description:
+          'Chat with your 24/7 intelligent study companion for instant answers, concept breakdowns, and guided learning.',
+      gradeLevel: 'Smart Assistant',
+      subject: 'AI Tutor',
+      hasProgress: false,
+      ctaText: 'Open AI Tutor',
+      mediaBadges: [
+        StudentSearchMediaBadge(
+          type: StudentSearchMediaType.ar,
+          icon: PhosphorIconsFill.sparkle,
+          backgroundColor: Color(0xFF0284C7),
+          iconColor: Colors.white,
+          hasActiveGlow: true,
+        ),
+      ],
+    ),
+    StudentSearchResultModel(
+      id: 'feat_quizzes',
+      category: 'QUIZZES',
+      title: 'Quizzes',
+      description:
+          'Challenge yourself with adaptive AI quizzes and curated skill tests with real-time feedback.',
+      gradeLevel: 'Assessments',
+      subject: 'Quizzes',
+      hasProgress: false,
+      ctaText: 'Open Quizzes',
+      mediaBadges: [
+        StudentSearchMediaBadge(
+          type: StudentSearchMediaType.quiz,
+          icon: PhosphorIconsFill.question,
+          backgroundColor: Color(0xFFD97706),
+          iconColor: Colors.white,
+          hasActiveGlow: true,
+        ),
+      ],
+    ),
+    StudentSearchResultModel(
+      id: 'feat_math_solver',
+      category: 'MATH SOLVER',
+      title: 'Math Solver',
+      description:
+          'Solve math equations with step-by-step guidance via photo scan, voice input, or typing.',
+      gradeLevel: 'Problem Solver',
+      subject: 'Math Solver',
+      hasProgress: false,
+      ctaText: 'Open Math Solver',
+      mediaBadges: [
+        StudentSearchMediaBadge(
+          type: StudentSearchMediaType.document,
+          icon: PhosphorIconsFill.calculator,
+          backgroundColor: Color(0xFF059669),
+          iconColor: Colors.white,
+          hasActiveGlow: true,
+        ),
+      ],
+    ),
+  ];
+
   @override
   void onInit() {
     super.onInit();
@@ -193,7 +299,9 @@ class StudentSearchController extends GetxController {
 
   List<StudentSearchResultModel> get searchResults {
     final q = query.value.toLowerCase().trim();
-    final filtered = initialResults.where((item) {
+    final sourceList = isIndividual ? individualFeatureResults : initialResults;
+
+    final filtered = sourceList.where((item) {
       if (q.isNotEmpty) {
         final matchesQuery = item.title.toLowerCase().contains(q) ||
             item.category.toLowerCase().contains(q) ||
@@ -203,6 +311,17 @@ class StudentSearchController extends GetxController {
       }
 
       if (selectedCategory.value == 'All') return true;
+
+      if (isIndividual) {
+        if (selectedCategory.value == 'AR' && item.title == 'AR') return true;
+        if (selectedCategory.value == 'VR' && item.title == 'VR') return true;
+        if (selectedCategory.value == 'AI Tutor' && item.title == 'AI Tutor') return true;
+        if (selectedCategory.value == 'Quizzes' && item.title == 'Quizzes') return true;
+        if (selectedCategory.value == 'Math Solver' && item.title == 'Math Solver') return true;
+        return item.title.toLowerCase() == selectedCategory.value.toLowerCase() ||
+            item.category.toLowerCase().contains(selectedCategory.value.toLowerCase());
+      }
+
       if (selectedCategory.value == 'Lessons') return true;
       if (selectedCategory.value == 'Subjects') {
         return item.category.toLowerCase().contains(q) ||
@@ -225,6 +344,13 @@ class StudentSearchController extends GetxController {
 
   String get resultsCountSummary {
     final count = searchResults.length;
+    if (isIndividual) {
+      if (query.value.trim().isEmpty) {
+        return '$count features available';
+      }
+      final term = query.value.trim();
+      return '$count features found for "$term"';
+    }
     if (query.value.trim().isEmpty) {
       return '$count topics available';
     }
@@ -261,27 +387,27 @@ class StudentSearchController extends GetxController {
 
   String getCtaText(StudentSearchResultModel result) {
     if (!isIndividual) return result.ctaText;
-    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.ar)) {
-      return 'Explore in AR';
-    }
-    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.video)) {
-      return 'Watch in VR';
-    }
-    if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.quiz)) {
-      return 'Take Quiz';
-    }
-    return 'Explore in AR';
+    if (result.title == 'AR') return 'Explore AR';
+    if (result.title == 'VR') return 'Explore VR';
+    if (result.title == 'AI Tutor') return 'Open AI Tutor';
+    if (result.title == 'Quizzes') return 'Open Quizzes';
+    if (result.title == 'Math Solver') return 'Open Math Solver';
+    return result.ctaText;
   }
 
   void onResultAction(StudentSearchResultModel result) {
     if (Get.context != null) {
       if (isIndividual) {
-        if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.ar)) {
+        if (result.title == 'AR') {
           Get.toNamed(Routes.STUDENT_AR_LEARNING);
-        } else if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.video)) {
+        } else if (result.title == 'VR') {
           Get.toNamed(Routes.STUDENT_VR_VIDEOS);
-        } else if (result.mediaBadges.any((b) => b.type == StudentSearchMediaType.quiz)) {
+        } else if (result.title == 'AI Tutor') {
+          Get.toNamed(Routes.STUDENT_AI_TUTOR);
+        } else if (result.title == 'Quizzes') {
           Get.toNamed(Routes.INDIVIDUAL_QUIZZES);
+        } else if (result.title == 'Math Solver') {
+          Get.toNamed(Routes.STUDENT_MATH_SOLVER);
         } else {
           Get.toNamed(Routes.STUDENT_AR_LEARNING);
         }

@@ -106,9 +106,11 @@ class StudentSearchView extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: Color(0xFF191C1D),
                     ),
-                    decoration: const InputDecoration(
-                      hintText: 'Search subject...',
-                      hintStyle: TextStyle(
+                    decoration: InputDecoration(
+                      hintText: controller.isIndividual
+                          ? 'Search features & tools...'
+                          : 'Search subject...',
+                      hintStyle: const TextStyle(
                         fontFamily: AppTextStyle.fontFamily,
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
@@ -208,7 +210,9 @@ class StudentSearchView extends StatelessWidget {
         // Title & Count Subtitle
         Obx(
           () => Text(
-            controller.isSearching ? 'Search Results' : 'Explore Topics',
+            controller.isSearching
+                ? 'Search Results'
+                : (controller.isIndividual ? 'Explore Features' : 'Explore Topics'),
             style: const TextStyle(
               fontFamily: AppTextStyle.fontFamily,
               fontSize: 16,
@@ -429,40 +433,42 @@ class StudentSearchView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          // Metadata Line: Class 8 • Biology
-          Row(
-            children: [
-              Text(
-                result.gradeLevel,
-                style: const TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF414754),
+          // Metadata Line: Class 8 • Biology (Student role only)
+          if (!controller.isIndividual) ...[
+            Row(
+              children: [
+                Text(
+                  result.gradeLevel,
+                  style: const TextStyle(
+                    fontFamily: AppTextStyle.fontFamily,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF414754),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                width: 4,
-                height: 4,
-                decoration: const BoxDecoration(
-                  color: Color(0xFFC1C6D7),
-                  shape: BoxShape.circle,
+                const SizedBox(width: 8),
+                Container(
+                  width: 4,
+                  height: 4,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFC1C6D7),
+                    shape: BoxShape.circle,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Text(
-                result.subject,
-                style: const TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                  color: Color(0xFF414754),
+                const SizedBox(width: 8),
+                Text(
+                  result.subject,
+                  style: const TextStyle(
+                    fontFamily: AppTextStyle.fontFamily,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFF414754),
+                  ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
+              ],
+            ),
+            const SizedBox(height: 14),
+          ],
           // Media Badges Row
           Row(
             children: result.mediaBadges.map((badge) {

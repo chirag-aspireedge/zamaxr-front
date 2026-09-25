@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../routes/app_pages.dart';
+import '../widgets/in_app_browser_sheet.dart';
 
 class RecommendedModuleItem {
   final String category;
-  final String categoryColor; // green, blue, amber
+  final String categoryColor; // hex color string or identifier
   final String categoryBg;
   final String categoryBorder;
   final String typeTag;
@@ -28,232 +30,187 @@ class RecommendedModuleItem {
   });
 }
 
-class WhatNewItem {
+class IndividualActivityItem {
   final String title;
-  final String badge;
-  final String description;
+  final String subtitle;
+  final String pointsEarned;
+  final String timeAgo;
   final IconData icon;
   final Color iconColor;
   final Color iconBg;
+  final VoidCallback onTap;
 
-  const WhatNewItem({
+  const IndividualActivityItem({
     required this.title,
-    required this.badge,
-    required this.description,
+    required this.subtitle,
+    required this.pointsEarned,
+    required this.timeAgo,
     required this.icon,
     required this.iconColor,
     required this.iconBg,
+    required this.onTap,
   });
 }
 
 class IndividualHomeController extends GetxController {
   final RxString userName = 'Alex'.obs;
-  final RxString selectedRegion = 'West Africa • Nigeria'.obs;
   final RxInt streakDays = 7.obs;
   final RxInt rewardsTokens = 245.obs;
   final RxInt currentNavIndex = 0.obs;
   final RxBool isLowBandwidth = false.obs;
 
-  final List<String> availableRegions = const [
-    'West Africa • Nigeria',
-    'West Africa • Ghana',
-    'East Africa • Kenya',
-    'Southern Africa • South Africa',
-    'North Africa • Egypt',
-    'Global STEM Curriculum',
-  ];
-
   late final List<RecommendedModuleItem> recommendedModules;
+  late final List<IndividualActivityItem> recentActivities;
 
   @override
   void onInit() {
     super.onInit();
     _initRecommendedModules();
+    _initRecentActivities();
   }
 
   void _initRecommendedModules() {
+    // 5 Feature entry points replacing curriculum/lesson cards
     recommendedModules = [
       RecommendedModuleItem(
-        category: 'Regional STEM',
-        categoryColor: '#047857',
-        categoryBg: '#ECFDF5',
-        categoryBorder: '#A7F3D0',
-        typeTag: '3D Module',
-        title: 'Photosynthesis & Tropical Flora',
-        description:
-            'Regional biology modules contextualized with West African rainforest flora and plant systems.',
-        duration: '15 mins',
-        actionLabel: 'Explore AR',
-        onTap: () {
-          Get.toNamed(Routes.STUDENT_AR_LEARNING);
-        },
-      ),
-      RecommendedModuleItem(
-        category: 'E-mmerX Training',
+        category: 'AR',
         categoryColor: '#127FD2',
         categoryBg: '#EFF6FF',
         categoryBorder: '#BFDBFE',
-        typeTag: 'Self-Paced',
-        title: 'Digital Literacy & Tech Skills',
+        typeTag: '3D Simulation',
+        title: 'AR',
         description:
-            'Foundation course on emerging tech tailored for students and young creators across West Africa.',
-        duration: 'Cert. Included',
-        actionLabel: 'View',
-        onTap: () {
-          openEmmerxeduWebView();
-        },
+            'Explore interactive 3D simulations and place models directly in real-world environments.',
+        duration: 'Interactive',
+        actionLabel: 'Explore AR',
+        onTap: onOpenAr,
       ),
       RecommendedModuleItem(
-        category: 'Applied Science',
+        category: 'VR',
+        categoryColor: '#7C3AED',
+        categoryBg: '#F5F3FF',
+        categoryBorder: '#DDD6FE',
+        typeTag: '360° Spatial',
+        title: 'VR',
+        description:
+            'Step into 360° virtual spaces, environments, and immersive spatial video tours.',
+        duration: '360° Spatial',
+        actionLabel: 'Explore VR',
+        onTap: onOpenVr,
+      ),
+      RecommendedModuleItem(
+        category: 'AI Tutor',
+        categoryColor: '#0284C7',
+        categoryBg: '#F0F9FF',
+        categoryBorder: '#BAE6FD',
+        typeTag: 'Smart Assistant',
+        title: 'AI Tutor',
+        description:
+            'Chat with your 24/7 intelligent study companion for instant answers and guided explanations.',
+        duration: 'Instant Q&A',
+        actionLabel: 'Chat Now',
+        onTap: onOpenAiTutor,
+      ),
+      RecommendedModuleItem(
+        category: 'Quizzes',
         categoryColor: '#B45309',
         categoryBg: '#FFFBEB',
         categoryBorder: '#FDE68A',
-        typeTag: 'VR Ready',
-        title: 'Clean Energy & Solar Grids',
+        typeTag: 'Quiz Hub',
+        title: 'Quizzes',
         description:
-            'Hands-on interactive 3D physics lab simulating sub-Saharan renewable energy and microgrid models.',
-        duration: '20 mins',
-        actionLabel: 'Explore',
-        onTap: () {
-          Get.toNamed(Routes.STUDENT_VR_VIDEOS);
-        },
+            'Challenge yourself with adaptive AI quizzes, timed tests, and skill assessments.',
+        duration: 'Assessments',
+        actionLabel: 'Open Quizzes',
+        onTap: onOpenQuiz,
+      ),
+      RecommendedModuleItem(
+        category: 'Math Solver',
+        categoryColor: '#047857',
+        categoryBg: '#ECFDF5',
+        categoryBorder: '#A7F3D0',
+        typeTag: 'Scan / Voice',
+        title: 'Math Solver',
+        description:
+            'Solve math equations with step-by-step guidance via photo scan, voice input, or typing.',
+        duration: 'Multi-input',
+        actionLabel: 'Open Solver',
+        onTap: onOpenMathSolver,
       ),
     ];
   }
 
-  void onSelectRegion(String region) {
-    selectedRegion.value = region;
-    Get.back();
-    Get.snackbar(
-      'Curriculum Updated',
-      'Switched regional modules to $region',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: const Color(0xFF0A2540),
-      colorText: Colors.white,
-      duration: const Duration(seconds: 2),
-      margin: const EdgeInsets.all(16),
-      borderRadius: 12,
-    );
+  void _initRecentActivities() {
+    recentActivities = [
+      IndividualActivityItem(
+        title: 'Quiz Completed',
+        subtitle: 'Adaptive AI Challenge',
+        pointsEarned: '+50 Points Earned',
+        timeAgo: '2h ago',
+        icon: PhosphorIconsBold.checkCircle,
+        iconColor: const Color(0xFF10B981),
+        iconBg: const Color(0xFFECFDF5),
+        onTap: onOpenQuiz,
+      ),
+      IndividualActivityItem(
+        title: 'Points Earned',
+        subtitle: '7-Day Streak Active Bonus',
+        pointsEarned: '+35 Points Earned',
+        timeAgo: 'Today',
+        icon: PhosphorIconsBold.fire,
+        iconColor: const Color(0xFFF59E0B),
+        iconBg: const Color(0xFFFFFBEB),
+        onTap: onOpenRewards,
+      ),
+      IndividualActivityItem(
+        title: 'AI Tutor Session',
+        subtitle: 'Concept explanations & Q&A',
+        pointsEarned: '+25 Points Earned',
+        timeAgo: 'Yesterday',
+        icon: PhosphorIconsBold.magicWand,
+        iconColor: const Color(0xFF0284C7),
+        iconBg: const Color(0xFFF0F9FF),
+        onTap: onOpenAiTutor,
+      ),
+      IndividualActivityItem(
+        title: 'AR Exploration',
+        subtitle: 'Interactive 3D simulation session',
+        pointsEarned: '+30 Points Earned',
+        timeAgo: '3 days ago',
+        icon: PhosphorIconsBold.cube,
+        iconColor: const Color(0xFF127FD2),
+        iconBg: const Color(0xFFEFF6FF),
+        onTap: onOpenAr,
+      ),
+    ];
   }
 
   void onSearchTap() {
     currentNavIndex.value = 1;
   }
 
-  void onExploreArVr() {
+  void onOpenAr() {
     Get.toNamed(Routes.STUDENT_AR_LEARNING);
+  }
+
+  void onOpenVr() {
+    Get.toNamed(Routes.STUDENT_VR_VIDEOS);
   }
 
   void onOpenAiTutor() {
     Get.toNamed(Routes.STUDENT_AI_TUTOR);
   }
 
-  void onOpenMathSolver() {
-    Get.toNamed(Routes.STUDENT_MATH_SOLVER);
-  }
-
   void onOpenQuiz() {
     Get.toNamed(Routes.INDIVIDUAL_QUIZZES);
   }
 
-  void onOpenRewards() {
-    currentNavIndex.value = 2;
+  void onOpenMathSolver() {
+    Get.toNamed(Routes.STUDENT_MATH_SOLVER);
   }
 
-  void openEmmerxeduWebView() {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFE0F6FF),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(
-                    Icons.language_rounded,
-                    color: Color(0xFF127FD2),
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'e-mmerxedu.com',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF0A2540),
-                      ),
-                    ),
-                    Text(
-                      'In-App Web Course Portal',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Access digital literacy, vocational certifications, and self-paced regional training powered by the E-mmerxedu learning network.',
-              style: TextStyle(fontSize: 13, color: Color(0xFF475569), height: 1.4),
-            ),
-            const SizedBox(height: 22),
-            SizedBox(
-              width: double.infinity,
-              height: 48,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Get.back();
-                  Get.toNamed(Routes.STUDENT_SELF_PACED);
-                },
-                icon: const Icon(Icons.open_in_new_rounded, color: Colors.white, size: 18),
-                label: const Text(
-                  'Launch Portal',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF127FD2),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 0,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-      isScrollControlled: true,
-    );
+  void onOpenRewards() {
+    currentNavIndex.value = 2;
   }
 
   void onOpenProfile() {
@@ -264,12 +221,18 @@ class IndividualHomeController extends GetxController {
     Get.toNamed(Routes.NOTIFICATIONS);
   }
 
+  void openEmmerxeduWebView() {
+    if (Get.context != null) {
+      InAppBrowserSheet.show(Get.context!);
+    }
+  }
+
   void toggleLowBandwidth() {
     isLowBandwidth.value = !isLowBandwidth.value;
     Get.snackbar(
       isLowBandwidth.value ? 'Low-Bandwidth Mode On' : 'Standard Quality Mode',
       isLowBandwidth.value
-          ? '3D models compressed for offline & slow connections'
+          ? '3D & VR assets optimized for slow connections'
           : 'High fidelity 3D and VR simulations enabled',
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: const Color(0xFF0A2540),

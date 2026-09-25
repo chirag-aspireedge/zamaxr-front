@@ -41,7 +41,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
                 ),
               ),
 
-              // 8. Floating Bottom Pill Navigation Bar
+              // Floating Bottom Pill Navigation Bar
               Positioned(
                 left: 20,
                 right: 20,
@@ -66,29 +66,27 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
           _buildHeader(context),
           const SizedBox(height: 14),
 
-
-
           // 2. PRIMARY FEATURE: AR/VR Learning Hero Card
           _buildHeroCard(),
           const SizedBox(height: 24),
 
-          // 3. LEARNING TOOLS (Quick Access: AI Tutor, Math Solver, Quiz)
-          _buildLearningToolsSection(),
+          // 3. EXPLORE FEATURES (Feature Entry Points replacing lesson cards)
+          _buildExploreFeaturesSection(context),
           const SizedBox(height: 24),
 
-          // 4. RECOMMENDED FOR YOU (Country/Regional STEM Context)
-          _buildRecommendedSection(context),
-          const SizedBox(height: 24),
-
-          // 5. SELF-PACED LEARNING: E-mmerxedu In-App WebView Card
+          // 5. SELF-PACED LEARNING: E-mmerxedu In-App Browser Card
           _buildSelfPacedCard(),
           const SizedBox(height: 20),
 
-          // 6. PROGRESS & REWARDS: Compact Horizontal Section
+          // 6. RECENT ACTIVITY (Feature-based: Quiz, Points, AI, AR)
+          _buildRecentActivitySection(),
+          const SizedBox(height: 20),
+
+          // 7. PROGRESS & REWARDS: Compact Horizontal Section
           _buildProgressRewardsCard(),
           const SizedBox(height: 24),
 
-          // 7. WHAT'S NEW: Announcements & Updates
+          // 8. WHAT'S NEW: Announcements & Updates
           _buildWhatsNewSection(),
           const SizedBox(height: 20),
         ],
@@ -373,7 +371,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
 
                   // Button: Explore AR/VR
                   GestureDetector(
-                    onTap: controller.onExploreArVr,
+                    onTap: controller.onOpenAr,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
@@ -391,7 +389,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'Explore AR/VR',
+                            'Explore AR',
                             style: TextStyle(
                               fontFamily: AppTextStyle.fontFamily,
                               fontSize: 12,
@@ -418,172 +416,19 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
     );
   }
 
-  // 3. LEARNING TOOLS: Quick Access
-  Widget _buildLearningToolsSection() {
+  // 3. EXPLORE FEATURES (Feature Entry Points replacing lesson cards)
+  Widget _buildExploreFeaturesSection(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section Header
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              'LEARNING TOOLS',
-              style: TextStyle(
-                fontFamily: AppTextStyle.fontFamily,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.6,
-                color: Color(0xFF64748B),
-              ),
-            ),
-            GestureDetector(
-              onTap: controller.onOpenAiTutor,
-              child: const Text(
-                'Quick Access',
-                style: TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 11,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFF127FD2),
-                ),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10),
-
-        // Row of 3 Tool Cards
-        Row(
-          children: [
-            // Tool 1: AI Tutor
-            Expanded(
-              child: _buildToolCard(
-                icon: PhosphorIconsBold.magicWand,
-                title: 'AI Tutor',
-                subtitle: 'Ask anything',
-                onTap: controller.onOpenAiTutor,
-              ),
-            ),
-            const SizedBox(width: 10),
-
-            // Tool 2: Math Solver
-            Expanded(
-              child: _buildToolCard(
-                icon: PhosphorIconsBold.radical,
-                title: 'Math Solver',
-                subtitle: 'Step by step',
-                onTap: controller.onOpenMathSolver,
-              ),
-            ),
-            const SizedBox(width: 10),
-
-            // Tool 3: Quiz
-            Expanded(
-              child: _buildToolCard(
-                icon: PhosphorIconsBold.clipboardText,
-                title: 'Quiz',
-                subtitle: 'Test knowledge',
-                onTap: controller.onOpenQuiz,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildToolCard({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE2E8F0).withValues(alpha: 0.8)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.02),
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Background Icon
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFFE0F6FF),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Center(
-                child: Icon(
-                  icon,
-                  size: 19,
-                  color: const Color(0xFF127FD2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 6),
-
-            // Title
-            Text(
-              title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontFamily: AppTextStyle.fontFamily,
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF1E293B),
-              ),
-            ),
-            const SizedBox(height: 2),
-
-            // Subtitle
-            Text(
-              subtitle,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontFamily: AppTextStyle.fontFamily,
-                fontSize: 10,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF94A3B8),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // 4. RECOMMENDED FOR YOU (Country/Regional STEM Context)
-  Widget _buildRecommendedSection(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Header with Country Switcher
+        // Header
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Expanded(
               child: Text(
-                'RECOMMENDED FOR YOU',
+                'EXPLORE FEATURES',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -597,45 +442,31 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
             ),
             const SizedBox(width: 8),
 
-            // Regional Switcher Pill
             GestureDetector(
-              onTap: () => _showRegionSelector(context),
+              onTap: controller.onSearchTap,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: const Color(0xFFEFF6FF),
                   borderRadius: BorderRadius.circular(9999),
                   border: Border.all(color: const Color(0xFFBFDBFE)),
                 ),
-                child: Row(
+                child: const Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
-                      PhosphorIconsFill.mapPin,
-                      size: 11,
-                      color: Color(0xFF127FD2),
-                    ),
-                    const SizedBox(width: 4),
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 125),
-                      child: Obx(
-                        () => Text(
-                          controller.selectedRegion.value,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontFamily: AppTextStyle.fontFamily,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF127FD2),
-                          ),
-                        ),
+                    Text(
+                      'View All',
+                      style: TextStyle(
+                        fontFamily: AppTextStyle.fontFamily,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF127FD2),
                       ),
                     ),
-                    const SizedBox(width: 3),
-                    const Icon(
-                      PhosphorIconsBold.caretDown,
-                      size: 9,
+                    SizedBox(width: 3),
+                    Icon(
+                      PhosphorIconsBold.caretRight,
+                      size: 10,
                       color: Color(0xFF127FD2),
                     ),
                   ],
@@ -646,7 +477,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
         ),
         const SizedBox(height: 12),
 
-        // Horizontal Carousel of Regional Module Cards
+        // Horizontal Carousel of Feature Cards (Approved Figma Card UI)
         SizedBox(
           height: 168,
           child: ListView.builder(
@@ -677,9 +508,15 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
       catColor = const Color(0xFFB45309);
       catBg = const Color(0xFFFFFBEB);
       catBorder = const Color(0xFFFDE68A);
+    } else if (module.categoryColor == '#7C3AED') {
+      catColor = const Color(0xFF7C3AED);
+      catBg = const Color(0xFFF5F3FF);
+      catBorder = const Color(0xFFDDD6FE);
+    } else if (module.categoryColor == '#0284C7') {
+      catColor = const Color(0xFF0284C7);
+      catBg = const Color(0xFFF0F9FF);
+      catBorder = const Color(0xFFBAE6FD);
     }
-
-    final bool isCertCard = module.duration.contains('Cert');
 
     return Container(
       width: 248,
@@ -722,44 +559,45 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
                   ),
                 ),
               ),
-              if (module.category != 'E-mmerX Training')
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      module.typeTag.contains('VR')
-                          ? PhosphorIconsBold.headset
-                          : module.typeTag.contains('Self')
-                              ? PhosphorIconsBold.laptop
-                              : PhosphorIconsBold.cube,
-                      size: 11,
-                      color: module.typeTag.contains('VR')
-                          ? const Color(0xFFA855F7)
-                          : const Color(0xFF3B82F6),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    module.typeTag.contains('VR')
+                        ? PhosphorIconsBold.headset
+                        : module.typeTag.contains('Scan')
+                            ? PhosphorIconsBold.radical
+                            : module.typeTag.contains('Quiz')
+                                ? PhosphorIconsBold.clipboardText
+                                : module.typeTag.contains('Assistant')
+                                    ? PhosphorIconsBold.magicWand
+                                    : PhosphorIconsBold.cube,
+                    size: 11,
+                    color: catColor,
+                  ),
+                  const SizedBox(width: 3),
+                  Text(
+                    module.typeTag,
+                    style: const TextStyle(
+                      fontFamily: AppTextStyle.fontFamily,
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF94A3B8),
                     ),
-                    const SizedBox(width: 3),
-                    Text(
-                      module.typeTag,
-                      style: const TextStyle(
-                        fontFamily: AppTextStyle.fontFamily,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF94A3B8),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ],
           ),
 
           // Title
           Text(
             module.title,
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontFamily: AppTextStyle.fontFamily,
-              fontSize: 12,
+              fontSize: 13,
               fontWeight: FontWeight.w700,
               color: Color(0xFF1E293B),
             ),
@@ -768,7 +606,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
           // Description
           Text(
             module.description,
-            maxLines: 3,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontFamily: AppTextStyle.fontFamily,
@@ -791,49 +629,46 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
-                      isCertCard
-                          ? PhosphorIconsBold.graduationCap
-                          : PhosphorIconsBold.clock,
-                      size: isCertCard ? 13 : 11,
-                      color: const Color(0xFF64748B),
+                    const Icon(
+                      PhosphorIconsBold.sparkle,
+                      size: 11,
+                      color: Color(0xFF64748B),
                     ),
                     const SizedBox(width: 4),
                     Text(
                       module.duration,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: AppTextStyle.fontFamily,
                         fontSize: 10,
-                        fontWeight: isCertCard ? FontWeight.w700 : FontWeight.w500,
-                        color: const Color(0xFF475569),
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF475569),
                       ),
                     ),
                   ],
                 ),
-                if (!isCertCard && module.actionLabel.isNotEmpty)
-                  GestureDetector(
-                    onTap: module.onTap,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          module.actionLabel,
-                          style: const TextStyle(
-                            fontFamily: AppTextStyle.fontFamily,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: Color(0xFF127FD2),
-                          ),
+                GestureDetector(
+                  onTap: module.onTap,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        module.actionLabel,
+                        style: TextStyle(
+                          fontFamily: AppTextStyle.fontFamily,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: catColor,
                         ),
-                        const SizedBox(width: 2),
-                        const Icon(
-                          PhosphorIconsBold.caretRight,
-                          size: 10,
-                          color: Color(0xFF127FD2),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 2),
+                      Icon(
+                        PhosphorIconsBold.caretRight,
+                        size: 10,
+                        color: catColor,
+                      ),
+                    ],
                   ),
+                ),
               ],
             ),
           ),
@@ -842,7 +677,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
     );
   }
 
-  // 5. SELF-PACED LEARNING: E-mmerxedu In-App WebView Card
+  // 5. SELF-PACED LEARNING: E-mmerxedu In-App Browser Card
   Widget _buildSelfPacedCard() {
     return Container(
       width: double.infinity,
@@ -995,7 +830,149 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
     );
   }
 
-  // 6. PROGRESS & REWARDS: Compact Horizontal Section
+  // 6. RECENT ACTIVITY (Feature-based: Quiz, Points, AI, AR)
+  Widget _buildRecentActivitySection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Section Header
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'RECENT ACTIVITY',
+              style: TextStyle(
+                fontFamily: AppTextStyle.fontFamily,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.6,
+                color: Color(0xFF64748B),
+              ),
+            ),
+            Text(
+              'Feature history',
+              style: TextStyle(
+                fontFamily: AppTextStyle.fontFamily,
+                fontSize: 11,
+                fontWeight: FontWeight.w400,
+                color: Color(0xFF94A3B8),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+
+        // List of Feature-based Recent Activities
+        ...controller.recentActivities.map((activity) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
+            ),
+            child: Row(
+              children: [
+                // Icon
+                Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: activity.iconBg,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      activity.icon,
+                      size: 17,
+                      color: activity.iconColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+
+                // Title & Subtitle
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              activity.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontFamily: AppTextStyle.fontFamily,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFF1E293B),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            activity.timeAgo,
+                            style: const TextStyle(
+                              fontFamily: AppTextStyle.fontFamily,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF94A3B8),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 2),
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              activity.subtitle,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontFamily: AppTextStyle.fontFamily,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF64748B),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Container(
+                            width: 3,
+                            height: 3,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xFFCBD5E1),
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            activity.pointsEarned,
+                            style: TextStyle(
+                              fontFamily: AppTextStyle.fontFamily,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w600,
+                              color: activity.iconColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }),
+      ],
+    );
+  }
+
+  // 7. PROGRESS & REWARDS: Compact Horizontal Section
   Widget _buildProgressRewardsCard() {
     return Container(
       width: double.infinity,
@@ -1182,7 +1159,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
     );
   }
 
-  // 7. WHAT'S NEW: Announcements & Updates
+  // 8. WHAT'S NEW: Announcements & Updates
   Widget _buildWhatsNewSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1214,15 +1191,16 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
         ),
         const SizedBox(height: 10),
 
-        // Item 1: New 3D Anatomy Lab
+        // Item 1: New 3D Simulations in AR
         _buildReleaseItem(
-          icon: PhosphorIconsBold.atom,
+          icon: PhosphorIconsBold.cube,
           iconBg: const Color(0xFFE0F6FF),
           iconColor: const Color(0xFF127FD2),
-          title: 'New 3D Anatomy Lab Released',
+          title: 'New 3D AR Tools Released',
           badge: 'New',
           badgeColor: const Color(0xFF127FD2),
-          description: 'Interactive human circulatory system simulation now ready in AR.',
+          description: 'Interactive real-world 3D simulations now ready to explore.',
+          onTap: controller.onOpenAr,
         ),
         const SizedBox(height: 8),
 
@@ -1327,7 +1305,7 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
     );
   }
 
-  // 8. Floating Bottom Pill Navigation Bar (Rectangle 17)
+  // Floating Bottom Pill Navigation Bar (Rectangle 17)
   Widget _buildFloatingBottomNav() {
     return Container(
       height: 61,
@@ -1432,111 +1410,6 @@ class IndividualHomeView extends GetView<IndividualHomeController> {
           ),
         ),
       ),
-    );
-  }
-
-  // Region Selector Bottom Sheet Modal
-  void _showRegionSelector(BuildContext context) {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.fromLTRB(24, 20, 24, 32),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 18),
-            const Row(
-              children: [
-                Icon(PhosphorIconsBold.globeHemisphereWest, color: Color(0xFF127FD2), size: 24),
-                SizedBox(width: 10),
-                Text(
-                  'Select Regional Curriculum',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF0A2540),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Switch your STEM content, interactive 3D simulations, and focus to your regional educational standard.',
-              style: TextStyle(fontSize: 12, color: Color(0xFF64748B)),
-            ),
-            const SizedBox(height: 16),
-            ...controller.availableRegions.map(
-              (region) => Obx(
-                () {
-                  final isSelected = controller.selectedRegion.value == region;
-                  return GestureDetector(
-                    onTap: () => controller.onSelectRegion(region),
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                      decoration: BoxDecoration(
-                        color: isSelected ? const Color(0xFFEFF6FF) : const Color(0xFFF8FAFC),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: isSelected ? const Color(0xFF3B82F6) : const Color(0xFFE2E8F0),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                PhosphorIconsBold.mapPin,
-                                size: 16,
-                                color: isSelected
-                                    ? const Color(0xFF127FD2)
-                                    : const Color(0xFF94A3B8),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                region,
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                                  color: isSelected
-                                      ? const Color(0xFF0A2540)
-                                      : const Color(0xFF475569),
-                                ),
-                              ),
-                            ],
-                          ),
-                          if (isSelected)
-                            const Icon(
-                              PhosphorIconsBold.checkCircle,
-                              size: 18,
-                              color: Color(0xFF127FD2),
-                            ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      isScrollControlled: true,
     );
   }
 }
