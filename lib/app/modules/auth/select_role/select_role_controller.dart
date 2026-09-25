@@ -2,11 +2,11 @@ import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
 
 enum UserRole {
+  institution,
+  parent,
+  individual,
   student,
   teacher,
-  parent,
-  institution,
-  individual,
 }
 
 class RoleItem {
@@ -38,17 +38,19 @@ class SelectRoleController extends GetxController {
     RoleItem(
       role: UserRole.parent,
       title: 'Parent',
-      description: 'Monitor student progress and stay connected with the school.',
+      description:
+          "Monitor your child's progress, stay connected with the school, and explore Interactive Quizzes, AR, VR and E-mmerx Professional Courses.",
     ),
     RoleItem(
       role: UserRole.institution,
-      title: 'Institution',
+      title: 'Institution / Private Tutors',
       description: 'Manage your institution, teachers, students and classes.',
     ),
     RoleItem(
       role: UserRole.individual,
       title: 'Individual',
-      description: 'Explore AR, VR, AI Tutor, Math Solver, and interactive Quizzes at your own pace.',
+      description:
+          'Explore AR, VR, AI Tutor, Math Solver, Interactive Quizzes and E-mmerx Professional training courses at your own pace.',
     ),
   ];
 

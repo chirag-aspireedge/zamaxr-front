@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:remixicon/remixicon.dart';
 import '../../../core/themes/app_color.dart';
 import '../../../core/themes/app_textstyle.dart';
@@ -68,7 +67,7 @@ class SelectRoleView extends GetView<SelectRoleController> {
                         ),
                       ),
 
-                      const SizedBox(height: 28),
+                      const SizedBox(height: 24),
 
                       // List of Roles
                       Obx(
@@ -77,7 +76,7 @@ class SelectRoleView extends GetView<SelectRoleController> {
                             final isSelected =
                                 controller.selectedRole.value == item.role;
                             return Padding(
-                              padding: const EdgeInsets.only(bottom: 16.0),
+                              padding: const EdgeInsets.only(bottom: 14.0),
                               child: _buildRoleCard(item, isSelected),
                             );
                           }).toList(),
@@ -106,9 +105,6 @@ class SelectRoleView extends GetView<SelectRoleController> {
     return GestureDetector(
       onTap: () {
         controller.selectRole(item.role);
-        if (item.role == UserRole.student) {
-          controller.continueWithRole();
-        }
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
@@ -118,17 +114,24 @@ class SelectRoleView extends GetView<SelectRoleController> {
           color: isSelected
               ? const Color(0xFFE0F6FF)
               : const Color(0x33F6F6F6),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected
                 ? const Color(0xFF1667A2)
                 : const Color(0xFFE7E7E7),
-            width: isSelected ? 0.8 : 1.0,
+            width: isSelected ? 1.4 : 1.0,
           ),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: const Color(0xFF1667A2).withValues(alpha: 0.12),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ]
+              : null,
         ),
-        padding: isSelected
-            ? const EdgeInsets.all(16.0)
-            : const EdgeInsets.symmetric(horizontal: 14.0, vertical: 18.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         child: isSelected
             ? _buildSelectedCardContent(item)
             : _buildUnselectedCardContent(item),
@@ -138,12 +141,12 @@ class SelectRoleView extends GetView<SelectRoleController> {
 
   Widget _buildUnselectedCardContent(RoleItem item) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Circular Icon Container (50x50)
+        // Circular Icon Container (52x52)
         Container(
-          width: 50,
-          height: 50,
+          width: 52,
+          height: 52,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: Color(0xFFE0F6FF),
@@ -153,24 +156,23 @@ class SelectRoleView extends GetView<SelectRoleController> {
           ),
         ),
 
-        const SizedBox(width: 14),
+        const SizedBox(width: 16),
 
         // Text details
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 item.title,
                 style: const TextStyle(
                   fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 16,
+                  fontSize: 16.5,
                   fontWeight: FontWeight.w600,
                   color: Color(0xFF191C1E),
                 ),
               ),
-              const SizedBox(height: 3),
+              const SizedBox(height: 6),
               Text(
                 item.description,
                 style: const TextStyle(
@@ -178,7 +180,7 @@ class SelectRoleView extends GetView<SelectRoleController> {
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
                   color: Color(0xFF464555),
-                  height: 17 / 13,
+                  height: 1.45,
                 ),
               ),
             ],
@@ -197,8 +199,8 @@ class SelectRoleView extends GetView<SelectRoleController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              width: 50,
-              height: 50,
+              width: 52,
+              height: 52,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xFF1567A2),
@@ -208,8 +210,8 @@ class SelectRoleView extends GetView<SelectRoleController> {
               ),
             ),
             Container(
-              width: 30,
-              height: 30,
+              width: 28,
+              height: 28,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0xFF1567A2),
@@ -224,26 +226,26 @@ class SelectRoleView extends GetView<SelectRoleController> {
               child: const Icon(
                 Icons.check,
                 color: AppColor.white,
-                size: 18,
+                size: 16,
               ),
             ),
           ],
         ),
 
-        const SizedBox(height: 14),
+        const SizedBox(height: 16),
 
         // Title
         Text(
           item.title,
           style: const TextStyle(
             fontFamily: AppTextStyle.fontFamily,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
+            fontSize: 17,
+            fontWeight: FontWeight.w700,
             color: Color(0xFF131313),
           ),
         ),
 
-        const SizedBox(height: 4),
+        const SizedBox(height: 6),
 
         // Description
         Text(
@@ -253,7 +255,7 @@ class SelectRoleView extends GetView<SelectRoleController> {
             fontSize: 13,
             fontWeight: FontWeight.w400,
             color: Color(0xFF131313),
-            height: 20 / 13,
+            height: 1.45,
           ),
         ),
       ],
@@ -261,45 +263,47 @@ class SelectRoleView extends GetView<SelectRoleController> {
   }
 
   Widget _getRoleIcon(UserRole role, {required bool isSelected}) {
-    final color = isSelected ? AppColor.white : const Color(0xFF131313);
+    final color = isSelected ? AppColor.white : const Color(0xFF1567A2);
 
     switch (role) {
       case UserRole.student:
         return Icon(
-          PhosphorIcons.student(PhosphorIconsStyle.regular),
+          Remix.graduation_cap_line,
           color: color,
-          size: 24,
+          size: 26,
         );
       case UserRole.teacher:
         return Icon(
-          PhosphorIcons.chalkboardTeacher(PhosphorIconsStyle.regular),
+          Remix.presentation_line,
           color: color,
-          size: 24,
-        );
-      case UserRole.parent:
-        return Icon(
-          Remix.parent_line,
-          color: color,
-          size: 24,
+          size: 26,
         );
       case UserRole.institution:
         return Icon(
           Remix.bank_line,
           color: color,
-          size: 24,
+          size: 26,
+        );
+      case UserRole.parent:
+        return Icon(
+          Remix.parent_line,
+          color: color,
+          size: 26,
         );
       case UserRole.individual:
         return Icon(
-          Remix.admin_line,
+          Remix.user_3_line,
           color: color,
-          size: 24,
+          size: 26,
         );
     }
   }
 
   Widget _buildContinueButton() {
-    final currentRole = controller.roles
-        .firstWhere((r) => r.role == controller.selectedRole.value);
+    final currentRole = controller.roles.firstWhere(
+      (r) => r.role == controller.selectedRole.value,
+      orElse: () => controller.roles.first,
+    );
 
     return Container(
       width: double.infinity,
@@ -323,23 +327,30 @@ class SelectRoleView extends GetView<SelectRoleController> {
           splashColor: Colors.white24,
           highlightColor: Colors.white10,
           child: Center(
-            child: RichText(
-              text: TextSpan(
-                style: const TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: AppColor.white,
-                ),
-                children: [
-                  const TextSpan(text: 'Continue as '),
-                  TextSpan(
-                    text: currentRole.title,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: RichText(
+                  maxLines: 1,
+                  text: TextSpan(
                     style: const TextStyle(
-                      fontWeight: FontWeight.w700,
+                      fontFamily: AppTextStyle.fontFamily,
+                      fontSize: 17,
+                      fontWeight: FontWeight.w400,
+                      color: AppColor.white,
                     ),
+                    children: [
+                      const TextSpan(text: 'Continue as '),
+                      TextSpan(
+                        text: currentRole.title,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

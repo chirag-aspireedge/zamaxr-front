@@ -56,7 +56,7 @@ class IndividualOnboardingController extends GetxController {
   }
 
   void skip() {
-    Get.offNamed(Routes.INDIVIDUAL_HOME);
+    Get.offNamed(Routes.INDIVIDUAL_REGISTRATION);
   }
 
   @override

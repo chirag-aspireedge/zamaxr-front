@@ -107,6 +107,8 @@ import '../modules/individual/onboarding/individual_onboarding_binding.dart';
 import '../modules/individual/onboarding/individual_onboarding_view.dart';
 import '../modules/individual/quizzes/individual_quizzes_binding.dart';
 import '../modules/individual/quizzes/individual_quizzes_view.dart';
+import '../modules/individual/registration/individual_registration_binding.dart';
+import '../modules/individual/registration/individual_registration_view.dart';
 
 abstract class Routes {
   Routes._();
@@ -118,6 +120,7 @@ abstract class Routes {
   static const SELECT_ROLE = _Paths.SELECT_ROLE;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const INDIVIDUAL_ONBOARDING = _Paths.INDIVIDUAL_ONBOARDING;
+  static const INDIVIDUAL_REGISTRATION = _Paths.INDIVIDUAL_REGISTRATION;
   static const INDIVIDUAL_HOME = _Paths.INDIVIDUAL_HOME;
   static const INDIVIDUAL_QUIZZES = _Paths.INDIVIDUAL_QUIZZES;
   static const PARENT_ONBOARDING = _Paths.PARENT_ONBOARDING;
@@ -209,6 +212,7 @@ abstract class _Paths {
   static const SELECT_ROLE = '/select-role';
   static const REGISTRATION = '/registration';
   static const INDIVIDUAL_ONBOARDING = '/individual/onboarding';
+  static const INDIVIDUAL_REGISTRATION = '/individual/registration';
   static const INDIVIDUAL_HOME = '/individual/home';
   static const INDIVIDUAL_QUIZZES = '/individual/quizzes';
   static const PARENT_ONBOARDING = '/parent/onboarding';
@@ -418,6 +422,12 @@ class AppPages {
       name: _Paths.INDIVIDUAL_ONBOARDING,
       page: () => const IndividualOnboardingView(),
       binding: IndividualOnboardingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.INDIVIDUAL_REGISTRATION,
+      page: () => const IndividualRegistrationView(),
+      binding: IndividualRegistrationBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

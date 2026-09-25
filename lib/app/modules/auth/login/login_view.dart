@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../../../core/themes/app_color.dart';
 import '../../../core/themes/app_textstyle.dart';
 import '../../../core/utils/app_assets.dart';
+import '../../../routes/app_pages.dart';
 import 'login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -251,7 +252,7 @@ class LoginView extends GetView<LoginController> {
                                     // Google Button
                                     Expanded(
                                       child: _buildSocialButton(
-                                        label: 'With Google',
+                                        label: 'Google login',
                                         iconWidget: _buildGoogleIcon(),
                                         onTap: controller.loginWithGoogle,
                                       ),
@@ -260,7 +261,7 @@ class LoginView extends GetView<LoginController> {
                                     // Apple Button
                                     Expanded(
                                       child: _buildSocialButton(
-                                        label: 'With Apple',
+                                        label: 'Apple login',
                                         iconWidget: const Icon(
                                           Icons.apple,
                                           color: AppColor.white,
@@ -273,6 +274,37 @@ class LoginView extends GetView<LoginController> {
                                 ),
 
                                 SizedBox(height: bottomGap),
+
+                                // Don't have an account? Sign Up
+                                Center(
+                                  child: GestureDetector(
+                                    onTap: () => Get.toNamed(Routes.SELECT_ROLE),
+                                    child: RichText(
+                                      text: const TextSpan(
+                                        text: "Don't have an account? ",
+                                        style: TextStyle(
+                                          fontFamily: AppTextStyle.fontFamily,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(0xCCFFFFFF),
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: 'Sign Up',
+                                            style: TextStyle(
+                                              fontFamily: AppTextStyle.fontFamily,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w700,
+                                              color: AppColor.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 24),
                               ],
                             ),
                           ),

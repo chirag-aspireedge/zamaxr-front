@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
-import '../home/parent_home_controller.dart';
+import '../../parent/registration/parent_registration_controller.dart' show CountryInfo;
 
-class CountryInfo {
-  final String name;
-  final String code;
-  final String flag;
-
-  const CountryInfo({
-    required this.name,
-    required this.code,
-    required this.flag,
-  });
-}
-
-class ParentRegistrationController extends GetxController {
+class IndividualRegistrationController extends GetxController {
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
@@ -62,29 +50,19 @@ class ParentRegistrationController extends GetxController {
   }
 
   void createAccount() {
-    // If a full name is entered, update parent's profile name
-    if (fullNameController.text.trim().isNotEmpty && Get.isRegistered<ParentHomeController>()) {
-      final homeController = Get.find<ParentHomeController>();
-      final name = fullNameController.text.trim();
-      homeController.parentFullName.value = name;
-      final firstName = name.split(' ').first;
-      homeController.userName.value = firstName;
-    }
+    Get.offAllNamed(Routes.INDIVIDUAL_HOME);
+  }
 
-    // Navigate directly to Parent Home
-    Get.offAllNamed(Routes.PARENT_HOME);
+  void continueWithGoogle() {
+    Get.offAllNamed(Routes.INDIVIDUAL_HOME);
+  }
+
+  void continueWithApple() {
+    Get.offAllNamed(Routes.INDIVIDUAL_HOME);
   }
 
   void navigateToLogin() {
     Get.toNamed(Routes.LOGIN);
-  }
-
-  void continueWithGoogle() {
-    Get.offAllNamed(Routes.PARENT_HOME);
-  }
-
-  void continueWithApple() {
-    Get.offAllNamed(Routes.PARENT_HOME);
   }
 
   @override

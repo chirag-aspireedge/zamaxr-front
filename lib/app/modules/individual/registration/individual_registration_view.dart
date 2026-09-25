@@ -4,15 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import '../../../core/themes/app_textstyle.dart';
-import 'parent_registration_controller.dart';
+import 'individual_registration_controller.dart';
 
-class ParentRegistrationView extends GetView<ParentRegistrationController> {
-  const ParentRegistrationView({super.key});
+class IndividualRegistrationView
+    extends GetView<IndividualRegistrationController> {
+  const IndividualRegistrationView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (!Get.isRegistered<ParentRegistrationController>()) {
-      Get.put(ParentRegistrationController());
+    if (!Get.isRegistered<IndividualRegistrationController>()) {
+      Get.put(IndividualRegistrationController());
     }
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -27,7 +28,7 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-            // Ambient Background Blur Spheres (Figma Depth Elements)
+            // Ambient Background Blur Spheres
             Positioned(
               right: -100,
               top: -100,
@@ -61,13 +62,14 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
               ),
             ),
 
-            // Main Form Content
+            // Main Content
             SafeArea(
               child: Column(
                 children: [
                   // Top Bar with Back Button
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
                     child: Row(
                       children: [
                         IconButton(
@@ -104,16 +106,16 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            "Create your account to manage and monitor your child's learning journey.",
+                            'Explore AR, VR, AI Tutor, Math Solver, and interactive Quizzes at your own pace.',
                             style: TextStyle(
                               fontFamily: AppTextStyle.fontFamily,
-                              fontSize: 15,
+                              fontSize: 14.5,
                               fontWeight: FontWeight.w400,
                               color: Color(0xFF414754),
                               height: 1.45,
                             ),
                           ),
-                          const SizedBox(height: 28),
+                          const SizedBox(height: 26),
 
                           // 2. Full Name
                           _buildLabel('Full Name'),
@@ -123,7 +125,7 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                             hintText: 'Enter your full name',
                             icon: PhosphorIconsRegular.user,
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 18),
 
                           // 3. Email Address
                           _buildLabel('Email Address'),
@@ -134,19 +136,19 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                             keyboardType: TextInputType.emailAddress,
                             icon: PhosphorIconsRegular.envelopeSimple,
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 18),
 
                           // 4. Select Your Country
                           _buildLabel('Select Your Country'),
                           const SizedBox(height: 8),
                           _buildCountrySelector(context),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 18),
 
                           // 5. Phone Number
                           _buildLabel('Phone Number'),
                           const SizedBox(height: 8),
                           _buildPhoneInput(),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 18),
 
                           // 6. Password
                           _buildLabel('Password'),
@@ -156,10 +158,11 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                               controller: controller.passwordController,
                               hintText: 'Create password',
                               isVisible: controller.isPasswordVisible.value,
-                              onToggleVisibility: controller.togglePasswordVisibility,
+                              onToggleVisibility:
+                                  controller.togglePasswordVisibility,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 18),
 
                           // 7. Confirm Password
                           _buildLabel('Confirm Password'),
@@ -168,15 +171,17 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                             () => _buildPasswordInput(
                               controller: controller.confirmPasswordController,
                               hintText: 'Confirm password',
-                              isVisible: controller.isConfirmPasswordVisible.value,
-                              onToggleVisibility: controller.toggleConfirmPasswordVisibility,
+                              isVisible:
+                                  controller.isConfirmPasswordVisible.value,
+                              onToggleVisibility:
+                                  controller.toggleConfirmPasswordVisibility,
                             ),
                           ),
-                          const SizedBox(height: 22),
+                          const SizedBox(height: 20),
 
                           // 8. Terms and Conditions
                           _buildTermsAndConditions(),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 28),
 
                           // 9. Create Account Button
                           _buildSubmitButton(),
@@ -186,7 +191,7 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                           _buildOrDivider(),
                           const SizedBox(height: 18),
 
-                          // 11. Social Signup Buttons
+                          // 11. Social Buttons: Continue with Google & Apple
                           _buildSocialButton(
                             label: 'Continue with Google',
                             icon: _buildGoogleIcon(),
@@ -204,7 +209,7 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                           ),
                           const SizedBox(height: 24),
 
-                          // 12. Already have an account? Sign in
+                          // 12. Already have an account? Log In
                           Center(
                             child: GestureDetector(
                               onTap: controller.navigateToLogin,
@@ -245,7 +250,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Label Widget
   Widget _buildLabel(String text) {
     return Text(
       text,
@@ -259,7 +263,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Regular Text Input
   Widget _buildTextInput({
     required TextEditingController controller,
     required String hintText,
@@ -319,7 +322,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Country Selector Widget
   Widget _buildCountrySelector(BuildContext context) {
     return GestureDetector(
       onTap: () => _showCountryPicker(context),
@@ -371,7 +373,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Phone Input with Country Flag + Code Prefix
   Widget _buildPhoneInput() {
     return Container(
       height: 48,
@@ -389,7 +390,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
       ),
       child: Row(
         children: [
-          // Country code prefix pill
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             height: 48,
@@ -431,8 +431,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
               ),
             ),
           ),
-
-          // Phone Number text field
           Expanded(
             child: TextField(
               controller: controller.phoneController,
@@ -453,7 +451,8 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
                 ),
                 border: InputBorder.none,
                 isDense: true,
-                contentPadding: EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
               ),
             ),
           ),
@@ -462,7 +461,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Password Input Field with Eye Toggle
   Widget _buildPasswordInput({
     required TextEditingController controller,
     required String hintText,
@@ -520,7 +518,9 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
           IconButton(
             onPressed: onToggleVisibility,
             icon: Icon(
-              isVisible ? PhosphorIconsRegular.eye : PhosphorIconsRegular.eyeSlash,
+              isVisible
+                  ? PhosphorIconsRegular.eye
+                  : PhosphorIconsRegular.eyeSlash,
               size: 18,
               color: const Color(0xFFC1C6D7),
             ),
@@ -531,20 +531,22 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Terms and Conditions Checkbox Row
   Widget _buildTermsAndConditions() {
     return Obx(
       () => Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-            onTap: () => controller.toggleTermsAccepted(!controller.isTermsAccepted.value),
+            onTap: () => controller
+                .toggleTermsAccepted(!controller.isTermsAccepted.value),
             child: Container(
               width: 20,
               height: 20,
               margin: const EdgeInsets.only(top: 2.0),
               decoration: BoxDecoration(
-                color: controller.isTermsAccepted.value ? const Color(0xFF0E5E9B) : Colors.white,
+                color: controller.isTermsAccepted.value
+                    ? const Color(0xFF0E5E9B)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(4),
                 border: Border.all(
                   color: controller.isTermsAccepted.value
@@ -561,7 +563,8 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
           const SizedBox(width: 12),
           Expanded(
             child: GestureDetector(
-              onTap: () => controller.toggleTermsAccepted(!controller.isTermsAccepted.value),
+              onTap: () => controller
+                  .toggleTermsAccepted(!controller.isTermsAccepted.value),
               child: RichText(
                 text: const TextSpan(
                   text: 'I agree to the ',
@@ -598,7 +601,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
     );
   }
 
-  // Create Account Submit Button
   Widget _buildSubmitButton() {
     return GestureDetector(
       onTap: controller.createAccount,
@@ -635,71 +637,6 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
           ),
         ),
       ),
-    );
-  }
-
-  // Bottom Sheet Country Picker
-  void _showCountryPicker(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Select Country',
-                style: TextStyle(
-                  fontFamily: AppTextStyle.fontFamily,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF191C1D),
-                ),
-              ),
-              const SizedBox(height: 12),
-              const Divider(height: 1),
-              Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: controller.countries.length,
-                  itemBuilder: (context, index) {
-                    final country = controller.countries[index];
-                    return ListTile(
-                      leading: Text(country.flag, style: const TextStyle(fontSize: 22)),
-                      title: Text(
-                        country.name,
-                        style: const TextStyle(
-                          fontFamily: AppTextStyle.fontFamily,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF191C1D),
-                        ),
-                      ),
-                      trailing: Text(
-                        country.code,
-                        style: const TextStyle(
-                          fontFamily: AppTextStyle.fontFamily,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xFF727782),
-                        ),
-                      ),
-                      onTap: () {
-                        controller.selectCountry(country);
-                        Navigator.pop(context);
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -805,6 +742,71 @@ class ParentRegistrationView extends GetView<ParentRegistrationController> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showCountryPicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Select Country',
+                style: TextStyle(
+                  fontFamily: AppTextStyle.fontFamily,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF191C1D),
+                ),
+              ),
+              const SizedBox(height: 12),
+              const Divider(height: 1),
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.countries.length,
+                  itemBuilder: (context, index) {
+                    final country = controller.countries[index];
+                    return ListTile(
+                      leading: Text(country.flag,
+                          style: const TextStyle(fontSize: 22)),
+                      title: Text(
+                        country.name,
+                        style: const TextStyle(
+                          fontFamily: AppTextStyle.fontFamily,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Color(0xFF191C1D),
+                        ),
+                      ),
+                      trailing: Text(
+                        country.code,
+                        style: const TextStyle(
+                          fontFamily: AppTextStyle.fontFamily,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF727782),
+                        ),
+                      ),
+                      onTap: () {
+                        controller.selectCountry(country);
+                        Navigator.pop(context);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
